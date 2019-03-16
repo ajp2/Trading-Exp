@@ -4,12 +4,19 @@ const User = require("../../models/User");
 const bcrypt = require("bcryptjs");
 const secretOrKey = require("../../config/keys").secretOrKey;
 const jwt = require("jsonwebtoken");
+const validateRegisterInput = require("../../validation/register");
+const validateLoginInput = require("../../validation/login");
 
 router.get("/", (req, res) => {
   res.send("users");
 });
 
 router.post("/register", (req, res) => {
+  const { errors, isValid } = validateRegisterInput(req.body);
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
   User.findOne({ username: req.body.username }).then(user => {
     if (user) {
       return res.status(400).json({ username: "Username already exists" });
@@ -37,6 +44,11 @@ router.post("/register", (req, res) => {
 });
 
 router.post("/login", (req, res) => {
+  const { errors, isValid } = validateLoginInput(req.body);
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
   const username = req.body.username;
   const password = req.body.password;
 
