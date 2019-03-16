@@ -9,6 +9,9 @@ mongoose
   .then(() => console.log("Connected to mongoDB"))
   .catch(err => console.log(err));
 
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
 app.get("/", (req, res) => {
   res.send("testing");
 });
