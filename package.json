@@ -1,0 +1,32 @@
+{
+  "name": "trading-exp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ajp2/Trading-Exp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ajp2/Trading-Exp/issues"
+  },
+  "homepage": "https://github.com/ajp2/Trading-Exp#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.5.0",
+    "mongoose": "^5.4.19",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "validator": "^10.11.0"
+  }
+}
