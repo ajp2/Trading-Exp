@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const db = require("./config/keys").mongoURI;
-
 const users = require("./routes/api/users");
 
 mongoose
@@ -11,7 +10,6 @@ mongoose
   .catch(err => console.log(err));
 
 app.get("/", (req, res) => {
-  debugger;
   res.send("testing");
 });
 
