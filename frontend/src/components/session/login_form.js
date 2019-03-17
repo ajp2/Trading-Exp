@@ -19,7 +19,7 @@ export class LoginForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
     const user = { ...this.state };
-    // this.props.login(user);
+    this.props.login(user);
   }
 
   render() {
