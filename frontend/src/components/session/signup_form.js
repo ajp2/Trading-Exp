@@ -10,16 +10,25 @@ export class SignupForm extends Component {
       username: "",
       password: ""
     };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  handleSubmit(e) {
+    e.preventDefault();
+    const user = { ...this.state };
+    this.props.signup(user);
+  }
+
   render() {
     return (
       <div>
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <input
             type="text"
             name="first_name"
