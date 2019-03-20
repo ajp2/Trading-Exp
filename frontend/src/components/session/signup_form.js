@@ -15,6 +15,10 @@ export class SignupForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    this.props.clearErrors();
+  }
+
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }

@@ -2,9 +2,10 @@ import * as APIutil from "../util/session_api_util";
 import jwt_decode from "jwt-decode";
 
 export const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
-export const RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS";
 export const LOGOUT_USER = "LOGOUT_USER";
 export const RECEIVE_USER_SIGN_IN = "RECEIVE_USER_SIGN_IN";
+export const RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS";
+export const CLEAR_SESSION_ERRROS = "CLEAR_SESSION_ERRORS";
 
 export const receiveCurrentUser = currentUser => ({
   type: RECEIVE_CURRENT_USER,
@@ -18,6 +19,10 @@ export const receiveUserSignIn = () => ({
 export const receiveErrors = errors => ({
   type: RECEIVE_SESSION_ERRORS,
   errors
+});
+
+export const clearErrors = () => ({
+  type: CLEAR_SESSION_ERRROS
 });
 
 export const logoutUser = () => ({
