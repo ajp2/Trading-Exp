@@ -22,7 +22,14 @@ export class SignupForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
     const user = { ...this.state };
-    this.props.signup(user);
+    this.props.signup(user).then(() => {
+      if (this.props.authoriseSignIn) {
+        this.props.login({
+          username: this.state.username,
+          password: this.props.password
+        });
+      }
+    });
   }
 
   render() {

@@ -8,7 +8,7 @@ export class NavBar extends Component {
         <div>
           <Link to="/home">Home</Link>
           <Link to="/trades">Trades</Link>
-          <button>Logout</button>
+          <button onClick={this.props.logout}>Logout</button>
         </div>
       );
     } else {
