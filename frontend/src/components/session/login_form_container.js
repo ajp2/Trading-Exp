@@ -3,7 +3,8 @@ import { login } from "../../actions/session_actions";
 import LoginForm from "./login_form";
 
 const mapStateToProps = state => ({
-  loggedIn: state.session.isAuthenticated
+  loggedIn: state.session.isAuthenticated,
+  errors: state.errors.session
 });
 
 const mapDispatchToProps = dispatch => ({

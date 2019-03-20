@@ -37,6 +37,16 @@ export class SignupForm extends Component {
   render() {
     return (
       <div>
+        {this.props.errors ? (
+          <ul>
+            {Object.values(this.props.errors).map((err, idx) => (
+              <li key={idx}>{err}</li>
+            ))}
+          </ul>
+        ) : (
+          false
+        )}
+
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
