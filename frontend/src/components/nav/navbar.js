@@ -24,7 +24,9 @@ export class NavBar extends Component {
   render() {
     return (
       <header>
-        <h1>TradingExp</h1>
+        <Link to="/">
+          <h1>TradingExp</h1>
+        </Link>
         {this.displayLinks()}
       </header>
     );

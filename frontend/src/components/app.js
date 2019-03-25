@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import MainPage from "./main/main_page";
+import MainPageContainer from "./main/main_page_container";
 import NavBarContainer from "./nav/navbar_container";
 import SignupFormContainer from "./session/signup_form_container";
 import LoginFormContainer from "./session/login_form_container";
@@ -11,7 +11,7 @@ class App extends Component {
       <div className="App">
         <NavBarContainer />
         <Switch>
-          <Route exact path="/" component={MainPage} />
+          <Route exact path="/" component={MainPageContainer} />} />
           <Route expact path="/signup" component={SignupFormContainer} />
           <Route expact path="/login" component={LoginFormContainer} />
         </Switch>

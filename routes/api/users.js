@@ -44,6 +44,11 @@ router.post("/register", (req, res) => {
 });
 
 router.post("/login", (req, res) => {
+  // Set password for guest account
+  if (req.body.username === "guest") {
+    req.body.password = "password123";
+  }
+
   const { errors, isValid } = validateLoginInput(req.body);
   if (!isValid) {
     return res.status(400).json(errors);
