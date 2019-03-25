@@ -12,7 +12,7 @@ module.exports = function(data) {
   }
 
   if (Validator.isEmpty(data.password)) {
-    errors.password = "Password is Password";
+    errors.password = "Password is required";
   }
 
   return {
