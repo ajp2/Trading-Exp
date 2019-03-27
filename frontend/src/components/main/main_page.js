@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./main_page.css";
 
 class MainPage extends Component {
   constructor(props) {
@@ -15,9 +16,17 @@ class MainPage extends Component {
 
   render() {
     return (
-      <div>
-        <h2>main page</h2>
-        <button onClick={this.guestLogin}>Login as a Guest</button>
+      <div className="main">
+        <div className="image">
+          <img src={require("../../images/front-page-image.jpg")} alt="" />
+        </div>
+        <div className="main-text">
+          <h2>Test your investing skills.</h2>
+          <p>
+            Sick of losing money in the market? Start practicing for free today.
+          </p>
+          <button onClick={this.guestLogin}>Login as a Guest</button>
+        </div>
       </div>
     );
   }

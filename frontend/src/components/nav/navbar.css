@@ -1,0 +1,39 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 100px;
+  border-bottom: 1px solid #eee;
+}
+
+.brand {
+  text-decoration: none;
+  color: #000;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.brand h1 {
+  font-size: 24px;
+  display: inline-block;
+}
+
+.brand > img {
+  width: 50px;
+  height: 50px;
+}
+
+.navbar .brand-text {
+  color: #21ce99;
+}
+
+.links > a {
+  margin-left: 100px;
+  padding: 5px;
+  text-decoration: none;
+}
+
+.links > a:hover {
+  color: #ccc;
+}

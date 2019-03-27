@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import "./navbar.css";
 
 export class NavBar extends Component {
   displayLinks() {
@@ -13,7 +14,7 @@ export class NavBar extends Component {
       );
     } else {
       return (
-        <div>
+        <div className="links">
           <Link to="/signup">Sign Up</Link>
           <Link to="/login">Login</Link>
         </div>
@@ -23,9 +24,12 @@ export class NavBar extends Component {
 
   render() {
     return (
-      <header>
-        <Link to="/">
-          <h1>TradingExp</h1>
+      <header className="navbar">
+        <Link to="/" className="brand">
+          <img src={require("../../images/logo.png")} alt="" />
+          <h1>
+            Trading<span className="brand-text">Exp</span>
+          </h1>
         </Link>
         {this.displayLinks()}
       </header>

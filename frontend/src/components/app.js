@@ -4,6 +4,7 @@ import NavBarContainer from "./nav/navbar_container";
 import SignupFormContainer from "./session/signup_form_container";
 import LoginFormContainer from "./session/login_form_container";
 import { Route, Switch } from "react-router-dom";
+import "./app.css";
 
 class App extends Component {
   render() {
