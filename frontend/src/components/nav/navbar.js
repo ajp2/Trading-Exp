@@ -32,6 +32,11 @@ export class NavBar extends Component {
           </h1>
         </Link>
         {this.displayLinks()}
+        <div className="hamburger-menu">
+          <div />
+          <div />
+          <div />
+        </div>
       </header>
     );
   }

@@ -1,21 +1,18 @@
 .main {
   display: flex;
-  background: url("../../images//front-page-image.jpg");
-  background-size: cover;
-  width: 100vw;
+  background: rgba(0, 0, 0, 0.5);
   height: calc(100vh - 61px);
-  background-position: center center;
-  position: relative;
-  z-index: -2;
 }
 
 .background-container {
+  background: url("../../images//front-page-image.jpg");
+  background-size: cover;
+  background-position: center center;
   position: absolute;
-  top: 0;
+  top: 61px;
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.5);
   z-index: -1;
 }
 
@@ -25,9 +22,9 @@
 
 .main-text {
   color: #fff;
-  width: 400px;
-  margin-top: 8%;
-  margin-right: 5%;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 25%;
   text-align: center;
 }
 
@@ -49,10 +46,10 @@
   color: #fff;
   font-size: 16px;
   padding: 20px 90px;
-  margin-bottom: 2px;
-  margin-right: 2px;
-  border-bottom: 2px solid #ccc;
-  border-right: 2px solid #ccc;
+  margin-bottom: 1px;
+  margin-right: 1px;
+  border-bottom: 1px solid #ccc;
+  border-right: 1px solid #ccc;
 }
 
 .main-text > button:hover {
@@ -62,6 +59,10 @@
 }
 
 @media only screen and (min-width: 768px) {
+  .main-text {
+    margin-top: 15%;
+  }
+
   .main-text > button {
     font-size: 18px;
   }
@@ -90,6 +91,10 @@
 
   .main-text {
     color: #000;
+    width: 400px;
+    margin-top: 8%;
+    margin-right: 5%;
+    text-align: center;
   }
 
   .main-text > h2 {

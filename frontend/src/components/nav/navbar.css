@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 5px 100px;
+  padding: 5px 20px;
   border-bottom: 1px solid #eee;
 }
 
@@ -36,7 +36,22 @@
   color: #ccc;
 }
 
+.hamburger-menu {
+  margin-right: 20px;
+}
+
+.hamburger-menu > div {
+  width: 30px;
+  height: 2px;
+  background-color: #000;
+  margin: 6px 0;
+}
+
 @media only screen and (min-width: 1000px) {
+  .navbar {
+    padding: 5px 100px;
+  }
+
   .links {
     display: initial;
   }
@@ -45,5 +60,9 @@
     margin-left: 100px;
     padding: 5px;
     text-decoration: none;
+  }
+
+  .hamburger-menu {
+    display: none;
   }
 }
