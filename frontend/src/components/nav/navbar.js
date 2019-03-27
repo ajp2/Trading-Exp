@@ -3,6 +3,10 @@ import { Link } from "react-router-dom";
 import "./navbar.css";
 
 export class NavBar extends Component {
+  componentDidMount() {
+    this.hamburgerMenu();
+  }
+
   displayLinks() {
     if (this.props.loggedIn) {
       return (
@@ -20,6 +24,14 @@ export class NavBar extends Component {
         </div>
       );
     }
+  }
+
+  hamburgerMenu() {
+    const menu = document.querySelector(".hamburger-menu");
+    menu.addEventListener("click", () => {
+      const links = document.querySelector(".links");
+      links.classList.toggle("show-links");
+    });
   }
 
   render() {
