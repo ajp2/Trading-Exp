@@ -1,19 +1,30 @@
 .main {
   display: flex;
+  background: url("../../images//front-page-image.jpg");
+  background-size: cover;
+  width: 100vw;
+  height: calc(100vh - 61px);
+  background-position: center center;
+  position: relative;
+  z-index: -2;
+}
+
+.background-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: -1;
 }
 
 .main .image {
-  margin-left: 13%;
-  margin-right: 13%;
-  margin-top: 3%;
-  width: 550px;
-}
-
-.main .image > img {
-  width: 550px;
+  display: none;
 }
 
 .main-text {
+  color: #fff;
   width: 400px;
   margin-top: 8%;
   margin-right: 5%;
@@ -21,13 +32,13 @@
 }
 
 .main-text > h2 {
-  font-size: 32px;
+  font-size: 24px;
   font-weight: bold;
   margin-bottom: 100px;
 }
 
 .main-text > p {
-  font-size: 28px;
+  font-size: 20px;
   margin-bottom: 150px;
 }
 
@@ -36,7 +47,7 @@
   border: none;
   border-radius: 10px;
   color: #fff;
-  font-size: 24px;
+  font-size: 16px;
   padding: 20px 90px;
   margin-bottom: 2px;
   margin-right: 2px;
@@ -48,4 +59,51 @@
   cursor: pointer;
   border: none;
   margin: 0;
+}
+
+@media only screen and (min-width: 768px) {
+  .main-text > button {
+    font-size: 18px;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .main {
+    background: none;
+  }
+
+  .main .image {
+    display: inline-block;
+    margin-left: 13%;
+    margin-right: 13%;
+    margin-top: 3%;
+    width: 550px;
+  }
+
+  .background-container {
+    display: none;
+  }
+
+  .main .image > img {
+    width: 550px;
+  }
+
+  .main-text {
+    color: #000;
+  }
+
+  .main-text > h2 {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 100px;
+  }
+
+  .main-text > p {
+    font-size: 28px;
+    margin-bottom: 150px;
+  }
+
+  .main-text > button {
+    font-size: 24px;
+  }
 }

@@ -20,6 +20,7 @@ class MainPage extends Component {
         <div className="image">
           <img src={require("../../images/front-page-image.jpg")} alt="" />
         </div>
+        <div className="background-container" />
         <div className="main-text">
           <h2>Test your investing skills.</h2>
           <p>
