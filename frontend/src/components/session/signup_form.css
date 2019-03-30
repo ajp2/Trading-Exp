@@ -2,32 +2,37 @@
   display: flex;
 }
 
+.signup-page ul {
+  color: red;
+  margin-top: 8%;
+  margin-bottom: -5%;
+}
+
+.signup-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
 .signup-page img {
-  width: 50%;
-  height: calc(100vh - 61px);
+  display: none;
 }
 
 .signup-form {
-  margin-top: 10%;
+  margin-top: 5%;
 }
 
 .signup-form input {
   display: block;
   padding: 10px;
   border-radius: 5px;
-  margin: 50px 0 50px 80px;
+  margin: 30px 0;
   border: 1px solid #707070;
   width: 300px;
 }
 
-.signup-form input[name="first_name"],
-.signup-form input[name="last_name"] {
-  display: inline-block;
-  margin: 10px 20px 0 80px;
-  width: 200px;
-}
-
 .signup-form button {
+  width: 320px;
   padding: 15px 100px;
   border: none;
   border-radius: 5px;
@@ -35,5 +40,51 @@
   color: #fff;
   font-weight: bold;
   font-size: 20px;
-  margin-left: calc((100% - 200px) / 2);
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 768px) {
+  .signup-page img {
+    display: initial;
+    width: 50%;
+    height: calc(100vh - 61px);
+  }
+
+  .signup-page ul {
+    margin-top: 20%;
+  }
+}
+
+@media screen and (min-width: 1320px) {
+  .signup-page {
+    display: flex;
+  }
+
+  .signup-page ul {
+    margin-top: 10%;
+    margin-left: 80px;
+  }
+
+  .signup-container {
+    margin: 0;
+  }
+
+  .signup-form {
+    margin-top: 10%;
+  }
+
+  .signup-form input {
+    margin: 50px 0 50px 80px;
+  }
+
+  .signup-form input[name="first_name"],
+  .signup-form input[name="last_name"] {
+    display: inline-block;
+    margin: 10px 20px 0 80px;
+    width: 200px;
+  }
+
+  .signup-form button {
+    margin-left: calc((100% - 200px) / 2);
+  }
 }

@@ -43,59 +43,61 @@ export class SignupForm extends Component {
     return (
       <div className="signup-page">
         <img src={require("../../images/signup-image.jpg")} alt="Photo" />
-        {this.props.errors ? (
-          <ul>
-            {Object.values(this.props.errors).map((err, idx) => (
-              <li key={idx}>{err}</li>
-            ))}
-          </ul>
-        ) : (
-          false
-        )}
+        <div className="signup-container">
+          {this.props.errors ? (
+            <ul>
+              {Object.values(this.props.errors).map((err, idx) => (
+                <li key={idx}>{err}</li>
+              ))}
+            </ul>
+          ) : (
+            false
+          )}
 
-        <form onSubmit={this.handleSubmit} className="signup-form">
-          <input
-            type="text"
-            name="first_name"
-            placeholder="first name"
-            value={this.state.first_name}
-            onChange={this.handleChange}
-          />
+          <form onSubmit={this.handleSubmit} className="signup-form">
+            <input
+              type="text"
+              name="first_name"
+              placeholder="first name"
+              value={this.state.first_name}
+              onChange={this.handleChange}
+            />
 
-          <input
-            type="text"
-            name="last_name"
-            placeholder="last name"
-            value={this.state.last_name}
-            onChange={this.handleChange}
-          />
+            <input
+              type="text"
+              name="last_name"
+              placeholder="last name"
+              value={this.state.last_name}
+              onChange={this.handleChange}
+            />
 
-          <input
-            type="text"
-            name="email"
-            placeholder="email"
-            value={this.state.email}
-            onChange={this.handleChange}
-          />
+            <input
+              type="text"
+              name="email"
+              placeholder="email"
+              value={this.state.email}
+              onChange={this.handleChange}
+            />
 
-          <input
-            type="text"
-            name="username"
-            placeholder="username"
-            value={this.state.username}
-            onChange={this.handleChange}
-          />
+            <input
+              type="text"
+              name="username"
+              placeholder="username"
+              value={this.state.username}
+              onChange={this.handleChange}
+            />
 
-          <input
-            type="password"
-            name="password"
-            placeholder="password"
-            value={this.state.password}
-            onChange={this.handleChange}
-          />
+            <input
+              type="password"
+              name="password"
+              placeholder="password"
+              value={this.state.password}
+              onChange={this.handleChange}
+            />
 
-          <button>Submit</button>
-        </form>
+            <button>Submit</button>
+          </form>
+        </div>
       </div>
     );
   }
