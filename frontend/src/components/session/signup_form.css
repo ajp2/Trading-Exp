@@ -43,6 +43,11 @@
   margin: 0 auto;
 }
 
+.signup-form button:hover {
+  cursor: pointer;
+  background: #25c091;
+}
+
 @media screen and (min-width: 768px) {
   .signup-page img {
     display: initial;
@@ -53,6 +58,10 @@
   .signup-page ul {
     margin-top: 20%;
   }
+
+  .signup-form input {
+    margin: 45px 0;
+  }
 }
 
 @media screen and (min-width: 1320px) {
@@ -61,7 +70,7 @@
   }
 
   .signup-page ul {
-    margin-top: 10%;
+    margin-top: 20%;
     margin-left: 80px;
   }
 

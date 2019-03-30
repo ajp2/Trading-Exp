@@ -54,6 +54,7 @@
 
 .main-text > button:hover {
   cursor: pointer;
+  background: #25c091;
   border: none;
   margin: 0;
 }
