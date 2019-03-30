@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./signup_form.css";
 
 export class SignupForm extends Component {
   constructor(props) {
@@ -40,7 +41,8 @@ export class SignupForm extends Component {
 
   render() {
     return (
-      <div>
+      <div className="signup-page">
+        <img src={require("../../images/signup-image.jpg")} alt="Photo" />
         {this.props.errors ? (
           <ul>
             {Object.values(this.props.errors).map((err, idx) => (
@@ -51,7 +53,7 @@ export class SignupForm extends Component {
           false
         )}
 
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} className="signup-form">
           <input
             type="text"
             name="first_name"

@@ -1,0 +1,39 @@
+.signup-page {
+  display: flex;
+}
+
+.signup-page img {
+  width: 50%;
+  height: calc(100vh - 61px);
+}
+
+.signup-form {
+  margin-top: 10%;
+}
+
+.signup-form input {
+  display: block;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 50px 0 50px 80px;
+  border: 1px solid #707070;
+  width: 300px;
+}
+
+.signup-form input[name="first_name"],
+.signup-form input[name="last_name"] {
+  display: inline-block;
+  margin: 10px 20px 0 80px;
+  width: 200px;
+}
+
+.signup-form button {
+  padding: 15px 100px;
+  border: none;
+  border-radius: 5px;
+  background: #21ce99;
+  color: #fff;
+  font-weight: bold;
+  font-size: 20px;
+  margin-left: calc((100% - 200px) / 2);
+}
