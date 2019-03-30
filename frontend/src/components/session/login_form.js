@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./login_form.css";
 
 export class LoginForm extends Component {
   constructor(props) {
@@ -32,36 +33,43 @@ export class LoginForm extends Component {
 
   render() {
     return (
-      <div>
-        {this.props.errors ? (
-          <ul>
-            {Object.values(this.props.errors).map((err, idx) => (
-              <li key={idx}>{err}</li>
-            ))}
-          </ul>
-        ) : (
-          false
-        )}
+      <div className="login-page">
+        <img
+          src={require("../../images/login-image.jpg")}
+          alt="Login up image"
+        />
+        <div className="login-container">
+          <h2>Login</h2>
+          {this.props.errors ? (
+            <ul>
+              {Object.values(this.props.errors).map((err, idx) => (
+                <li key={idx}>{err}</li>
+              ))}
+            </ul>
+          ) : (
+            false
+          )}
 
-        <form onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            name="username"
-            placeholder="username"
-            value={this.state.username}
-            onChange={this.handleChange}
-          />
+          <form onSubmit={this.handleSubmit} className="login-form">
+            <input
+              type="text"
+              name="username"
+              placeholder="username"
+              value={this.state.username}
+              onChange={this.handleChange}
+            />
 
-          <input
-            type="password"
-            name="password"
-            placeholder="password"
-            value={this.state.password}
-            onChange={this.handleChange}
-          />
+            <input
+              type="password"
+              name="password"
+              placeholder="password"
+              value={this.state.password}
+              onChange={this.handleChange}
+            />
 
-          <button>Submit</button>
-        </form>
+            <button>Submit</button>
+          </form>
+        </div>
       </div>
     );
   }

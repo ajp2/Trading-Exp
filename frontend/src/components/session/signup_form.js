@@ -47,6 +47,7 @@ export class SignupForm extends Component {
           alt="Sign up image"
         />
         <div className="signup-container">
+          <h2>Signup</h2>
           {this.props.errors ? (
             <ul>
               {Object.values(this.props.errors).map((err, idx) => (

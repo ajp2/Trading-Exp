@@ -22,6 +22,13 @@
   margin-top: 5%;
 }
 
+.signup-container h2 {
+  font-size: 32px;
+  font-weight: bold;
+  margin-top: 10%;
+  margin-bottom: 5%;
+}
+
 .signup-form input {
   display: block;
   padding: 10px;
@@ -55,8 +62,14 @@
     height: calc(100vh - 61px);
   }
 
+  .signup-container h2 {
+    margin-top: 10%;
+    margin-bottom: 10%;
+  }
+
   .signup-page ul {
-    margin-top: 20%;
+    margin-top: 0;
+    margin-bottom: -10%;
   }
 
   .signup-form input {
@@ -70,7 +83,6 @@
   }
 
   .signup-page ul {
-    margin-top: 20%;
     margin-left: 80px;
   }
 
@@ -78,8 +90,14 @@
     margin: 0;
   }
 
+  .signup-container h2 {
+    margin-top: 15%;
+    margin-bottom: 5%;
+    margin-left: 80px;
+  }
+
   .signup-form {
-    margin-top: 10%;
+    margin-top: 15%;
   }
 
   .signup-form input {
