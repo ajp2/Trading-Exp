@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import "./navbar.css";
+import { searchShares } from "../../util/shares_api_util";
 
 export class NavBar extends Component {
   constructor(props) {
@@ -24,7 +25,7 @@ export class NavBar extends Component {
 
   handleChange(e) {
     this.setState({ searchBar: e.target.value });
-    console.log(e.target.value);
+    searchShares(e.target.value).then(res => console.log(res.data.bestMatches));
   }
 
   displayLinks() {

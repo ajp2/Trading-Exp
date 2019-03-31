@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 const db = require("./config/keys").mongoURI;
 const users = require("./routes/api/users");
+const shares = require("./routes/api/shares");
 const path = require("path");
 
 mongoose
@@ -25,6 +26,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/users", users);
+app.use("/api/shares", shares);
 
 const port = process.env.PORT || 5000;
 
