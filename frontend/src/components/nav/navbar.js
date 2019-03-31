@@ -1,19 +1,30 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import "./navbar.css";
 
 export class NavBar extends Component {
+  constructor(props) {
+    super(props);
+
+    this.handleLogout = this.handleLogout.bind(this);
+  }
+
   componentDidMount() {
     this.hamburgerMenu();
+  }
+
+  handleLogout() {
+    this.props.logout();
+    this.props.history.push("/");
   }
 
   displayLinks() {
     if (this.props.loggedIn) {
       return (
         <div>
-          <Link to="/home">Home</Link>
+          <Link to="/portfolio">Home</Link>
           <Link to="/trades">Trades</Link>
-          <button onClick={this.props.logout}>Logout</button>
+          <button onClick={this.handleLogout}>Logout</button>
         </div>
       );
     } else {
@@ -37,7 +48,7 @@ export class NavBar extends Component {
   render() {
     return (
       <header className="navbar">
-        <Link to="/" className="brand">
+        <Link to={this.props.loggedIn ? "/portfolio" : "/"} className="brand">
           <img src={require("../../images/logo.png")} alt="" />
           <h1>
             Trading<span className="brand-text">Exp</span>
@@ -54,4 +65,4 @@ export class NavBar extends Component {
   }
 }
 
-export default NavBar;
+export default withRouter(NavBar);
