@@ -8,7 +8,7 @@ import NavBarContainer from "./nav/navbar_container";
 import SignupFormContainer from "./session/signup_form_container";
 import LoginFormContainer from "./session/login_form_container";
 import Portfolio from "./portfolio/portfolio";
-import Search from "./search/search";
+import SearchContainer from "./search/search_container";
 
 class App extends Component {
   render() {
@@ -20,7 +20,7 @@ class App extends Component {
           <AuthRoute expact path="/signup" component={SignupFormContainer} />
           <AuthRoute expact path="/login" component={LoginFormContainer} />
           <ProtectedRoute exact path="/portfolio" component={Portfolio} />
-          <ProtectedRoute exact path="/search" component={Search} />
+          <ProtectedRoute exact path="/search" component={SearchContainer} />
         </Switch>
       </div>
     );
