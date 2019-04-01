@@ -68,8 +68,7 @@ export class NavBar extends Component {
   handleSubmit(e) {
     e.preventDefault();
     this.setState({ searchBar: "", searchResults: [] });
-    this.props.history.push("/search");
-    this.props.search(this.state.searchBar);
+    this.props.history.push(`/search?query=${encodeURI(this.state.searchBar)}`);
   }
 
   displayLinks() {
