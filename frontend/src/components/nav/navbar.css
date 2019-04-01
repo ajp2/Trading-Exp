@@ -80,6 +80,27 @@
   margin: 6px 0;
 }
 
+.search-results {
+  position: absolute;
+  top: 111px;
+  left: calc(50% - 161px);
+  width: 320px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  z-index: 2;
+  background: #fff;
+}
+
+.search-results > li {
+  padding: 8px 10px;
+}
+
+.search-results > li:hover {
+  cursor: pointer;
+  background: #eee;
+}
+
 @media only screen and (min-width: 1000px) {
   .navbar {
     padding: 5px 50px;
@@ -118,10 +139,25 @@
     display: flex;
   }
 
-  .menu-left input {
-    position: initial;
+  .menu-left form {
     align-self: center;
+  }
+
+  .menu-left input {
+    position: relative;
+    top: 0;
+    left: 0;
     margin-left: 50px;
+  }
+
+  .search-container {
+    position: relative;
+  }
+
+  .search-results {
+    position: absolute;
+    top: 0;
+    left: 50px;
   }
 
   .hamburger-menu {

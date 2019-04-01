@@ -38,8 +38,10 @@ export class NavBar extends Component {
         );
       });
       searchResults = searchResults.slice(0, 10);
-      this.setState({ searchResults });
+    } else {
+      searchResults = [];
     }
+    this.setState({ searchResults });
   }
 
   findMatch(company, search) {
@@ -77,13 +79,15 @@ export class NavBar extends Component {
   displaySearchResults() {
     if (this.state.searchResults.length > 0) {
       return (
-        <ul className="search-results">
-          {this.state.searchResults.map((company, idx) => (
-            <li key={idx}>
-              {company.symbol} - {company.name}
-            </li>
-          ))}
-        </ul>
+        <div className="search-container">
+          <ul className="search-results">
+            {this.state.searchResults.map((company, idx) => (
+              <li key={idx}>
+                {company.symbol} - {company.name}
+              </li>
+            ))}
+          </ul>
+        </div>
       );
     }
   }
@@ -115,11 +119,11 @@ export class NavBar extends Component {
                 value={this.state.searchBar}
                 onChange={this.handleChange}
               />
+              {this.displaySearchResults()}
             </form>
           ) : (
             false
           )}
-          {this.displaySearchResults()}
         </div>
 
         {this.displayLinks()}
