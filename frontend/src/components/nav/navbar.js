@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import "./navbar.css";
-import { searchShares } from "../../util/shares_api_util";
 import companyList from "./companies_list.json";
 
 export class NavBar extends Component {
@@ -70,9 +69,7 @@ export class NavBar extends Component {
     e.preventDefault();
     this.setState({ searchBar: "", searchResults: [] });
     this.props.history.push("/search");
-    searchShares(this.state.searchBar).then(res =>
-      console.log(res.data.bestMatches)
-    );
+    this.props.search(this.state.searchBar);
   }
 
   displayLinks() {
