@@ -12,14 +12,32 @@ export class NavBar extends Component {
       searchResults: []
     };
 
+    document.addEventListener("click", e => this.toggleSearchResults(e));
+
     this.handleLogout = this.handleLogout.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.displaySearchResults = this.displaySearchResults.bind(this);
+    this.toggleSearchResults = this.toggleSearchResults.bind(this);
   }
 
   componentDidMount() {
     this.hamburgerMenu();
+  }
+
+  toggleSearchResults(e) {
+    if (this.state.searchResults.length <= 0) return;
+
+    const targetClasses = e.target.classList;
+    const searchContainer = document.querySelector(".search-container");
+    if (
+      targetClasses.contains("search-item") ||
+      targetClasses.contains("search-input")
+    ) {
+      searchContainer.classList.remove("hide-search-container");
+    } else {
+      searchContainer.classList.add("hide-search-container");
+    }
   }
 
   handleLogout() {
@@ -50,7 +68,7 @@ export class NavBar extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.setState({ searchBar: "" });
+    this.setState({ searchBar: "", searchResults: [] });
     this.props.history.push("/search");
     searchShares(this.state.searchBar).then(res =>
       console.log(res.data.bestMatches)
@@ -82,7 +100,7 @@ export class NavBar extends Component {
         <div className="search-container">
           <ul className="search-results">
             {this.state.searchResults.map((company, idx) => (
-              <li key={idx}>
+              <li key={idx} className="search-item">
                 {company.symbol} - {company.name}
               </li>
             ))}
@@ -116,6 +134,7 @@ export class NavBar extends Component {
               <input
                 type="text"
                 placeholder="search"
+                className="search-input"
                 value={this.state.searchBar}
                 onChange={this.handleChange}
               />

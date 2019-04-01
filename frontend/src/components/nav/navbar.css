@@ -101,6 +101,10 @@
   background: #eee;
 }
 
+.hide-search-container {
+  display: none;
+}
+
 @media only screen and (min-width: 1000px) {
   .navbar {
     padding: 5px 50px;
