@@ -2,16 +2,19 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import "./navbar.css";
 import { searchShares } from "../../util/shares_api_util";
+import companyList from "./companies_list.json";
 
 export class NavBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchBar: ""
+      searchBar: "",
+      searchResults: []
     };
 
     this.handleLogout = this.handleLogout.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -25,7 +28,30 @@ export class NavBar extends Component {
 
   handleChange(e) {
     this.setState({ searchBar: e.target.value });
-    searchShares(e.target.value).then(res => console.log(res.data.bestMatches));
+    let results = [];
+    if (e.target.value.length > 0) {
+      results = companyList.filter(company => {
+        return (
+          this.findMatch(company.symbol, e.target.value) ||
+          this.findMatch(company.name, e.target.value)
+        );
+      });
+      results = results.slice(0, 10);
+      this.setState({ results }, () => console.log(this.state.results));
+    }
+  }
+
+  findMatch(company, search) {
+    return company.toLowerCase().startsWith(search.toLowerCase());
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    this.setState({ searchBar: "" });
+    this.props.history.push("/search");
+    searchShares(this.state.searchBar).then(res =>
+      console.log(res.data.bestMatches)
+    );
   }
 
   displayLinks() {
@@ -66,11 +92,14 @@ export class NavBar extends Component {
             </h1>
           </Link>
           {this.props.loggedIn ? (
-            <input
-              type="text"
-              placeholder="search"
-              onChange={this.handleChange}
-            />
+            <form onSubmit={this.handleSubmit}>
+              <input
+                type="text"
+                placeholder="search"
+                value={this.state.searchBar}
+                onChange={this.handleChange}
+              />
+            </form>
           ) : (
             false
           )}

@@ -52,7 +52,7 @@
   color: #ccc;
 }
 
-.menu-left > input {
+.menu-left input {
   position: absolute;
   top: 80px;
   left: calc(50% - 161px);
@@ -118,7 +118,7 @@
     display: flex;
   }
 
-  .menu-left > input {
+  .menu-left input {
     position: initial;
     align-self: center;
     margin-left: 50px;
