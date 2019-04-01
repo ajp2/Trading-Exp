@@ -15,6 +15,7 @@ export class NavBar extends Component {
     this.handleLogout = this.handleLogout.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.displaySearchResults = this.displaySearchResults.bind(this);
   }
 
   componentDidMount() {
@@ -28,16 +29,16 @@ export class NavBar extends Component {
 
   handleChange(e) {
     this.setState({ searchBar: e.target.value });
-    let results = [];
+    let searchResults = [];
     if (e.target.value.length > 0) {
-      results = companyList.filter(company => {
+      searchResults = companyList.filter(company => {
         return (
           this.findMatch(company.symbol, e.target.value) ||
           this.findMatch(company.name, e.target.value)
         );
       });
-      results = results.slice(0, 10);
-      this.setState({ results }, () => console.log(this.state.results));
+      searchResults = searchResults.slice(0, 10);
+      this.setState({ searchResults });
     }
   }
 
@@ -73,6 +74,20 @@ export class NavBar extends Component {
     }
   }
 
+  displaySearchResults() {
+    if (this.state.searchResults.length > 0) {
+      return (
+        <ul className="search-results">
+          {this.state.searchResults.map((company, idx) => (
+            <li key={idx}>
+              {company.symbol} - {company.name}
+            </li>
+          ))}
+        </ul>
+      );
+    }
+  }
+
   hamburgerMenu() {
     const menu = document.querySelector(".hamburger-menu");
     menu.addEventListener("click", () => {
@@ -91,6 +106,7 @@ export class NavBar extends Component {
               Trading<span className="brand-text">Exp</span>
             </h1>
           </Link>
+
           {this.props.loggedIn ? (
             <form onSubmit={this.handleSubmit}>
               <input
@@ -103,7 +119,9 @@ export class NavBar extends Component {
           ) : (
             false
           )}
+          {this.displaySearchResults()}
         </div>
+
         {this.displayLinks()}
         <div className="hamburger-menu">
           <div />
