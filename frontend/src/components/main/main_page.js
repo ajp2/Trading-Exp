@@ -11,7 +11,7 @@ class MainPage extends Component {
     const user = {
       username: "guest"
     };
-    this.props.login(user).then(() => this.props.history.push("/portfolio"));
+    this.props.login(user).then(() => this.props.history.push("./portfolio"));
   }
 
   render() {

@@ -1,15 +1,17 @@
 .search-results-container {
-  margin-top: 80px;
+  margin: 80px 0;
 }
 
 .search-results-container h2 {
-  /* font-size: px; */
   font-weight: bold;
   margin-left: 35px;
   padding: 10px 0;
 }
 
-.search-results-list li {
+.search-results-list li a {
+  display: block;
+  color: #000;
+  text-decoration: none;
   padding: 20px;
   padding-left: 35px;
 }
@@ -31,7 +33,7 @@
 
 .search-results-list .region {
   float: right;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 @media screen and (min-width: 1000px) {
@@ -44,5 +46,10 @@
   .search-results-list {
     border: 1px solid #ccc;
     border-radius: 5px;
+  }
+
+  .search-results-list .region {
+    float: right;
+    font-size: 14px;
   }
 }

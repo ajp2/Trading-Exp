@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "./search.css";
 
 export class Search extends Component {
@@ -34,9 +35,11 @@ export class Search extends Component {
         <ul className="search-results-list">
           {this.props.searchResults.map((company, idx) => (
             <li key={idx}>
-              {company["2. name"]}
-              <span className="region">Country: {company["4. region"]}</span>
-              <span className="ticker">{company["1. symbol"]}</span>
+              <Link to={`/stocks/${company["1. symbol"]}`}>
+                {company["2. name"]}
+                <span className="region">Country: {company["4. region"]}</span>
+                <span className="ticker">{company["1. symbol"]}</span>
+              </Link>
             </li>
           ))}
         </ul>
