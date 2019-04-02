@@ -9,6 +9,7 @@ import SignupFormContainer from "./session/signup_form_container";
 import LoginFormContainer from "./session/login_form_container";
 import Portfolio from "./portfolio/portfolio";
 import SearchContainer from "./search/search_container";
+import CompanyContainer from "../components/company/company_container";
 
 class App extends Component {
   render() {
@@ -21,6 +22,7 @@ class App extends Component {
           <AuthRoute expact path="/login" component={LoginFormContainer} />
           <ProtectedRoute exact path="/portfolio" component={Portfolio} />
           <ProtectedRoute path="/search" component={SearchContainer} />
+          <ProtectedRoute path="/stocks/:ticker" component={CompanyContainer} />
         </Switch>
       </div>
     );
