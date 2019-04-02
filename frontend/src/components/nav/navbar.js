@@ -97,7 +97,14 @@ export class NavBar extends Component {
           <ul className="search-results">
             {this.state.searchResults.map((company, idx) => (
               <li key={idx} className="search-item">
-                {company.symbol} - {company.name}
+                <Link
+                  to={{
+                    pathname: `/stocks/${company.symbol}`,
+                    state: { name: company.name }
+                  }}
+                >
+                  {company.symbol} - {company.name}
+                </Link>
               </li>
             ))}
           </ul>

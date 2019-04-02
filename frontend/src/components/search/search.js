@@ -29,9 +29,20 @@ export class Search extends Component {
   }
 
   render() {
+    let tickerNotFound = false;
+    if (this.props.location.state && this.props.location.state.error) {
+      const invalidTicker = this.props.location.state.error;
+      const companyName = this.props.location.state.name;
+      tickerNotFound = `${invalidTicker} is an invalid ticker. Instead showing results for ${companyName}`;
+    }
+
     return (
       <div className="search-results-container">
-        <h2>Showing results for: {this.getQueryString()}</h2>
+        <h2>
+          {tickerNotFound
+            ? tickerNotFound
+            : "Showing results for:" + this.getQueryString()}
+        </h2>
         <ul className="search-results-list">
           {this.props.searchResults.map((company, idx) => (
             <li key={idx}>
