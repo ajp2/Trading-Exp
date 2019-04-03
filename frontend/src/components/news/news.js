@@ -19,15 +19,20 @@ export class News extends Component {
     console.log(this.state.news);
     return (
       <div className="news-container">
-        <p>news</p>
         {this.state.news.map((article, idx) => (
-          <div className="news-item" key={idx}>
+          <a
+            href={article.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="news-item"
+            key={idx}
+          >
             <img src={article.urlToImage} alt="News article" />
             <div className="news-content">
-              <h3>{article.title}</h3>
+              <h3>{article.title.split(" - ")[0]}</h3>
               <p>{article.description}</p>
             </div>
-          </div>
+          </a>
         ))}
       </div>
     );
