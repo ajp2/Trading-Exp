@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const db = require("./config/keys").mongoURI;
 const users = require("./routes/api/users");
 const shares = require("./routes/api/shares");
+const news = require("./routes/api/news");
 const path = require("path");
 
 mongoose
@@ -21,12 +22,9 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-app.get("/", (req, res) => {
-  res.send("testing");
-});
-
 app.use("/api/users", users);
 app.use("/api/shares", shares);
+app.use("/api/news", news);
 
 const port = process.env.PORT || 5000;
 
