@@ -41,12 +41,17 @@ export class Search extends Component {
         <h2>
           {tickerNotFound
             ? tickerNotFound
-            : "Showing results for:" + this.getQueryString()}
+            : "Showing results for: " + this.getQueryString()}
         </h2>
         <ul className="search-results-list">
           {this.props.searchResults.map((company, idx) => (
             <li key={idx}>
-              <Link to={`/stocks/${company["1. symbol"]}`}>
+              <Link
+                to={{
+                  pathname: `/stocks/${company["1. symbol"]}`,
+                  state: { name: company["2. name"] }
+                }}
+              >
                 {company["2. name"]}
                 <span className="region">Country: {company["4. region"]}</span>
                 <span className="ticker">{company["1. symbol"]}</span>

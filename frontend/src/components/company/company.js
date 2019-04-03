@@ -5,7 +5,9 @@ export class Company extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      timeFormat: "intraday"
+      companyInfo: "",
+      timeFormat: "intraday",
+      fetchedInfo: false
     };
 
     this.fetchTimeSeries = this.fetchTimeSeries.bind(this);
@@ -27,23 +29,37 @@ export class Company extends Component {
 
   fetchTimeSeries(query, timeFormat) {
     getTimesSeries(query, timeFormat).then(res => {
+      // Error can only occur by following link from dropdown.
+      // So state.name will always exist if error occurs
       if (res.data["Error Message"]) {
         this.props.history.push({
           pathname: "/search",
           search: `?query=${query}`,
-          state: { error: query }
+          state: {
+            error: query,
+            name: this.props.location.state.name
+          }
         });
       } else {
-        console.log(res.data);
+        this.setState({ companyInfo: res.data, fetchedInfo: true });
+        console.log(this.state.companyInfo);
       }
     });
   }
 
   render() {
     console.log(this.props);
+    if (!this.state.fetchedInfo) return false;
     return (
       <div>
         <h2>Company page</h2>
+        <p>
+          {
+            this.state.companyInfo["Time Series (5min)"][
+              Object.keys(this.state.companyInfo["Time Series (5min)"])[0]
+            ]["4. close"]
+          }
+        </p>
       </div>
     );
   }

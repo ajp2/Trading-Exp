@@ -96,8 +96,12 @@
   background: #fff;
 }
 
-.search-results > li {
+.search-results > li > a {
+  display: inline-block;
+  width: 300px;
   padding: 8px 10px;
+  color: #000;
+  text-decoration: none;
 }
 
 .search-results > li:hover {
