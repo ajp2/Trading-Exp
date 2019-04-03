@@ -11,7 +11,9 @@ export class News extends Component {
   }
 
   componentDidMount() {
-    getNews().then(res => this.setState({ news: res.data.articles }));
+    getNews().then(res =>
+      this.setState({ news: res.data.articles.slice(0, 15) })
+    );
   }
 
   render() {

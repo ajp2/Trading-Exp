@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import News from "../news/news";
 import { getTimesSeries } from "../../util/shares_api_util";
 
 export class Company extends Component {
@@ -51,7 +52,7 @@ export class Company extends Component {
     console.log(this.props);
     if (!this.state.fetchedInfo) return false;
     return (
-      <div>
+      <div className="company">
         <h2>Company page</h2>
         <p>
           {
@@ -60,6 +61,7 @@ export class Company extends Component {
             ]["4. close"]
           }
         </p>
+        <News />
       </div>
     );
   }

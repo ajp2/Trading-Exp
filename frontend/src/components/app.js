@@ -21,8 +21,12 @@ class App extends Component {
           <AuthRoute expact path="/signup" component={SignupFormContainer} />
           <AuthRoute expact path="/login" component={LoginFormContainer} />
           <ProtectedRoute exact path="/portfolio" component={Portfolio} />
-          <ProtectedRoute path="/search" component={SearchContainer} />
-          <ProtectedRoute path="/stocks/:ticker" component={CompanyContainer} />
+          <ProtectedRoute exact path="/search" component={SearchContainer} />
+          <ProtectedRoute
+            exact
+            path="/stocks/:ticker"
+            component={CompanyContainer}
+          />
         </Switch>
       </div>
     );
