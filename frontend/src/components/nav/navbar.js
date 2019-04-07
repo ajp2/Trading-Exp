@@ -128,7 +128,6 @@ export class NavBar extends Component {
   }
 
   render() {
-    console.log(this.props.state);
     return (
       <header className="navbar">
         <div className="menu-left">

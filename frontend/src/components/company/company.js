@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import News from "../news/news";
 import { getTimesSeries } from "../../util/shares_api_util";
+import StockPriceChart from "../stock_price_chart/stock_price_chart";
 
 export class Company extends Component {
   constructor(props) {
@@ -61,6 +62,7 @@ export class Company extends Component {
             ]["4. close"]
           }
         </p>
+        <StockPriceChart />
         <News />
       </div>
     );
