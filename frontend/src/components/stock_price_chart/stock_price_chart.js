@@ -10,14 +10,32 @@ export class StockPriceChart extends Component {
       data: {
         datasets: [
           {
-            data: [10, 20, 30, 40, 50, 60]
+            data: [10, 20, 5, 40, 120, 60, 20],
+            fill: false,
+            borderColor: "#21ce99",
+            pointRadius: 0,
+            pointHoverRadius: 5,
+            pointHitRadius: 150
           }
         ],
-        labels: ["January", "February", "March", "April", "May", "June"]
+        labels: ["January", "February", "March", "April", "May", "June", "July"]
       },
       options: {
         responsive: true,
-        maintainAspectRatio: false
+        maintainAspectRatio: false,
+        legend: { display: false },
+        scales: {
+          xAxes: [
+            {
+              display: false
+            }
+          ],
+          yAxes: [
+            {
+              display: false
+            }
+          ]
+        }
       }
     });
   }
