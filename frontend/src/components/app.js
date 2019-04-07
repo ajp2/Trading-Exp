@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import { AuthRoute, ProtectedRoute } from "../util/route_util";
 import "./app.css";
 
@@ -17,7 +17,7 @@ class App extends Component {
       <div className="App">
         <NavBarContainer />
         <Switch>
-          <AuthRoute exact path="/" component={MainPageContainer} />} />
+          <Route exact path="/" component={MainPageContainer} />} />
           <AuthRoute expact path="/signup" component={SignupFormContainer} />
           <AuthRoute expact path="/login" component={LoginFormContainer} />
           <ProtectedRoute exact path="/portfolio" component={Portfolio} />

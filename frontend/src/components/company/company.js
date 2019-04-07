@@ -53,6 +53,7 @@ export class Company extends Component {
     return (
       <div className="company">
         <h2>Company page</h2>
+        <p>{localStorage.getItem("companyName")}</p>
         <p>
           {
             this.state.companyInfo["Time Series (5min)"][

@@ -39,8 +39,10 @@
   margin-bottom: 120px;
 }
 
-.main-text > button {
+.main-text > button,
+.main-text > a {
   background: #21ce99;
+  text-decoration: none;
   border: none;
   border-radius: 10px;
   color: #fff;
@@ -52,7 +54,12 @@
   border-right: 1px solid #ccc;
 }
 
-.main-text > button:hover {
+.main-text > a {
+  font-size: 24px;
+}
+
+.main-text > button:hover,
+.main-text > a:hover {
   cursor: pointer;
   background: #25c091;
   border: none;

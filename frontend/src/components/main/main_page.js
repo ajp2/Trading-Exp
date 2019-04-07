@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "./main_page.css";
 
 class MainPage extends Component {
@@ -26,7 +27,11 @@ class MainPage extends Component {
           <p>
             Sick of losing money in the market? Start practicing for free today.
           </p>
-          <button onClick={this.guestLogin}>Login as a Guest</button>
+          {this.props.loggedIn ? (
+            <Link to="/portfolio">Back To Portfolio</Link>
+          ) : (
+            <button onClick={this.guestLogin}>Login as a Guest</button>
+          )}
         </div>
       </div>
     );
