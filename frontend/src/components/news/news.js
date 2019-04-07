@@ -18,7 +18,6 @@ export class News extends Component {
 
   render() {
     if (this.state.news.length === 0) return false;
-    console.log(this.state.news);
     return (
       <div className="news-container">
         {this.state.news.map((article, idx) => (

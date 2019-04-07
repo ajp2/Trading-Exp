@@ -96,7 +96,13 @@ export class NavBar extends Component {
         <div className="search-container">
           <ul className="search-results">
             {this.state.searchResults.map((company, idx) => (
-              <li key={idx} className="search-item">
+              <li
+                key={idx}
+                className="search-item"
+                onClick={() =>
+                  localStorage.setItem("companyName", company.name)
+                }
+              >
                 <Link
                   to={{
                     pathname: `/stocks/${company.symbol}`,
@@ -122,6 +128,7 @@ export class NavBar extends Component {
   }
 
   render() {
+    console.log(this.props.state);
     return (
       <header className="navbar">
         <div className="menu-left">

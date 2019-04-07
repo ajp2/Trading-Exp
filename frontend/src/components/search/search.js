@@ -45,7 +45,12 @@ export class Search extends Component {
         </h2>
         <ul className="search-results-list">
           {this.props.searchResults.map((company, idx) => (
-            <li key={idx}>
+            <li
+              key={idx}
+              onClick={() =>
+                localStorage.setItem("companyName", company["2. name"])
+              }
+            >
               <Link
                 to={{
                   pathname: `/stocks/${company["1. symbol"]}`,

@@ -24,6 +24,7 @@ export class Company extends Component {
     const newTicker = this.props.match.params.ticker;
     if (newTicker !== this.ticker) {
       this.ticker = newTicker;
+
       this.fetchTimeSeries(this.ticker, "intraday");
     }
   }
@@ -43,13 +44,11 @@ export class Company extends Component {
         });
       } else {
         this.setState({ companyInfo: res.data, fetchedInfo: true });
-        console.log(this.state.companyInfo);
       }
     });
   }
 
   render() {
-    console.log(this.props);
     if (!this.state.fetchedInfo) return false;
     return (
       <div className="company">
