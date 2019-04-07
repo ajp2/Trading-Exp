@@ -1,10 +1,32 @@
 .company {
-  margin-top: 60px;
+  margin-top: 70px;
+}
+
+.company-info h3 {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px;
+  padding-left: 25px;
+}
+
+.ticker-heading {
+  font-size: 16px;
+  font-weight: normal;
+  color: #aaa;
 }
 
 @media only screen and (min-width: 1000px) {
   .company {
     width: 900px;
     margin: 0 auto;
+    margin-top: 30px;
+  }
+
+  .company-info h3 {
+    font-size: 24px;
+  }
+
+  .ticker-heading {
+    font-size: 20px;
   }
 }

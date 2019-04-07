@@ -74,14 +74,19 @@ export class Company extends Component {
 
     return (
       <div className="company">
-        <p>{localStorage.getItem("companyName")}</p>
-        <p>
-          {
-            this.state.companyInfo["Time Series (5min)"][
-              Object.keys(this.state.companyInfo["Time Series (5min)"])[0]
-            ]["4. close"]
-          }
-        </p>
+        <div className="company-info">
+          <h3>
+            {localStorage.getItem("companyName")}{" "}
+            <span className="ticker-heading">({this.ticker})</span>
+          </h3>
+          <h3>
+            {
+              this.state.companyInfo["Time Series (5min)"][
+                Object.keys(this.state.companyInfo["Time Series (5min)"])[0]
+              ]["4. close"]
+            }
+          </h3>
+        </div>
         <StockPriceChart data={data} labels={labels} />
         <News />
       </div>
