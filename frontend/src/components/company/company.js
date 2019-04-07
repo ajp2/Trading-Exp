@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./company.css";
 import News from "../news/news";
 import { getTimesSeries } from "../../util/shares_api_util";
 import StockPriceChart from "../stock_price_chart/stock_price_chart";
@@ -73,7 +74,6 @@ export class Company extends Component {
 
     return (
       <div className="company">
-        <h2>Company page</h2>
         <p>{localStorage.getItem("companyName")}</p>
         <p>
           {
