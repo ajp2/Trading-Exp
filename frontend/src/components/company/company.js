@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import "./company.css";
 import News from "../news/news";
-import { getTimesSeries } from "../../util/shares_api_util";
+import {
+  getTimesSeries,
+  fetchCompanyDescription
+} from "../../util/shares_api_util";
 import StockPriceChart from "../stock_price_chart/stock_price_chart";
-import axios from "axios";
 
 export class Company extends Component {
   constructor(props) {
@@ -72,15 +74,11 @@ export class Company extends Component {
   }
 
   getCompanyDescription() {
-    axios
-      .get("/api/shares/description", {
-        params: { companyName: this.companyName }
-      })
-      .then(res => {
-        if (res.data.success) {
-          this.setState({ description: res.data.description });
-        }
-      });
+    fetchCompanyDescription(this.companyName).then(res => {
+      if (res.data.success) {
+        this.setState({ description: res.data.description });
+      }
+    });
   }
 
   render() {

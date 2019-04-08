@@ -18,3 +18,8 @@ export const getTimesSeries = (ticker, timeFormat) => {
     }
   });
 };
+
+export const fetchCompanyDescription = companyName =>
+  axios.get("/api/shares/description", {
+    params: { companyName }
+  });
