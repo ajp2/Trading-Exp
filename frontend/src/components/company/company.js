@@ -3,6 +3,7 @@ import "./company.css";
 import News from "../news/news";
 import { getTimesSeries } from "../../util/shares_api_util";
 import StockPriceChart from "../stock_price_chart/stock_price_chart";
+import axios from "axios";
 
 export class Company extends Component {
   constructor(props) {
@@ -15,7 +16,7 @@ export class Company extends Component {
 
     this.fetchTimeSeries = this.fetchTimeSeries.bind(this);
     this.getCompanyPrices = this.getCompanyPrices.bind(this);
-    this.getCompanyLabels = this.getCompanyLabels.bind(this);
+    this.getCompanyDescription = this.getCompanyDescription.bind(this);
   }
 
   componentDidMount() {
@@ -66,11 +67,25 @@ export class Company extends Component {
     return [formattedTimes, formattedPrices];
   }
 
-  getCompanyLabels() {}
+  getCompanyDescription() {
+    let description;
+    axios
+      .get("/api/shares/description", { params: { companyName: "apple" } })
+      .then(res => {
+        if (res.data.success) {
+          // console.log(res.data);
+          description = res.data.description;
+          return description;
+        }
+      });
+  }
 
   render() {
     if (!this.state.fetchedInfo) return false;
     const [labels, data] = this.getCompanyPrices();
+
+    const description = this.getCompanyDescription();
+    console.log(description);
 
     return (
       <div className="company">
@@ -88,6 +103,8 @@ export class Company extends Component {
           </h3>
         </div>
         <StockPriceChart data={data} labels={labels} />
+
+        <p className="description">sdf</p>
         <News />
       </div>
     );

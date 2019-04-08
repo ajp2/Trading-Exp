@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const alphaVantageAPI = require("../../config/keys").alphaVantage;
 const axios = require("axios");
+const cheerio = require("cheerio");
 
 router.get("/search", (req, res) => {
   axios
@@ -26,6 +27,29 @@ router.get("/timeseries", (req, res) => {
   }
 
   axios.get(apiURL).then(result => res.json(result.data));
+});
+
+router.get("/description", (req, res) => {
+  axios
+    .get(`https://www.google.com/search?q=${encodeURI(req.query.companyName)}`)
+    .then(
+      response => {
+        if (response.status === 200) {
+          const html = response.data;
+          const $ = cheerio.load(html);
+          const knowledgeGraph = $(".mraOPb");
+          if (knowledgeGraph.length > 0) {
+            knowledgeGraph.each((idx, el) => {
+              const description = el.children[0].children[0].data;
+              res.json({ success: true, description });
+            });
+          } else {
+            res.json({ success: false });
+          }
+        }
+      },
+      err => console.log(err)
+    );
 });
 
 module.exports = router;
