@@ -11,7 +11,8 @@ export class Company extends Component {
     this.state = {
       companyInfo: "",
       timeFormat: "intraday",
-      fetchedInfo: false
+      fetchedInfo: false,
+      description: ""
     };
 
     this.fetchTimeSeries = this.fetchTimeSeries.bind(this);
@@ -22,6 +23,8 @@ export class Company extends Component {
   componentDidMount() {
     const query = this.props.match.params.ticker;
     this.ticker = query;
+    this.companyName = localStorage.getItem("companyName");
+    this.getCompanyDescription();
     this.fetchTimeSeries(this.ticker, "intraday");
   }
 
@@ -29,7 +32,8 @@ export class Company extends Component {
     const newTicker = this.props.match.params.ticker;
     if (newTicker !== this.ticker) {
       this.ticker = newTicker;
-
+      this.companyName = localStorage.getItem("companyName");
+      this.getCompanyDescription();
       this.fetchTimeSeries(this.ticker, "intraday");
     }
   }
@@ -68,14 +72,13 @@ export class Company extends Component {
   }
 
   getCompanyDescription() {
-    let description;
     axios
-      .get("/api/shares/description", { params: { companyName: "apple" } })
+      .get("/api/shares/description", {
+        params: { companyName: this.companyName }
+      })
       .then(res => {
         if (res.data.success) {
-          // console.log(res.data);
-          description = res.data.description;
-          return description;
+          this.setState({ description: res.data.description });
         }
       });
   }
@@ -84,14 +87,11 @@ export class Company extends Component {
     if (!this.state.fetchedInfo) return false;
     const [labels, data] = this.getCompanyPrices();
 
-    const description = this.getCompanyDescription();
-    console.log(description);
-
     return (
       <div className="company">
         <div className="company-info">
           <h3>
-            {localStorage.getItem("companyName")}{" "}
+            {this.companyName}
             <span className="ticker-heading">({this.ticker})</span>
           </h3>
           <h3>
@@ -104,7 +104,7 @@ export class Company extends Component {
         </div>
         <StockPriceChart data={data} labels={labels} />
 
-        <p className="description">sdf</p>
+        <p className="description">{this.state.description}</p>
         <News />
       </div>
     );
