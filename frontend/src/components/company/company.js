@@ -20,6 +20,7 @@ export class Company extends Component {
     this.fetchTimeSeries = this.fetchTimeSeries.bind(this);
     this.getCompanyPrices = this.getCompanyPrices.bind(this);
     this.getCompanyDescription = this.getCompanyDescription.bind(this);
+    this.handleButtonClick = this.handleButtonClick.bind(this);
   }
 
   componentDidMount() {
@@ -81,6 +82,17 @@ export class Company extends Component {
     });
   }
 
+  handleButtonClick(e) {
+    if (!e.target.classList.contains("chart-button-container")) {
+      document
+        .querySelectorAll(".chart-button-container button")
+        .forEach(el => {
+          el.classList.remove("button-selected");
+        });
+      e.target.classList.add("button-selected");
+    }
+  }
+
   render() {
     if (!this.state.fetchedInfo) return false;
     const [labels, data] = this.getCompanyPrices();
@@ -101,6 +113,17 @@ export class Company extends Component {
           </h3>
         </div>
         <StockPriceChart data={data} labels={labels} />
+        <div
+          className="chart-button-container"
+          onClick={this.handleButtonClick}
+        >
+          <button className="button-selected">1 Day</button>
+          <button>1 Week</button>
+          <button>1 Month</button>
+          <button>1 Year</button>
+          <button>5 Years</button>
+          <button>10 Years</button>
+        </div>
 
         <p className="description">{this.state.description}</p>
         <News />

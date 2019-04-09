@@ -6,13 +6,42 @@
   font-size: 20px;
   font-weight: bold;
   padding: 10px;
-  padding-left: 25px;
 }
 
 .ticker-heading {
   font-size: 16px;
   font-weight: normal;
   color: #aaa;
+}
+
+.chart-container {
+  margin: 0;
+  padding: 0;
+}
+
+.chart-button-container > button {
+  margin: 0 3px;
+  padding-top: 8px;
+  background: #fff;
+  border: none;
+}
+
+.chart-button-container > button:hover {
+  cursor: pointer;
+  color: #21ce99;
+}
+
+.chart-button-container > button:focus {
+  outline: none;
+}
+
+.company .description {
+  margin-top: 20px;
+}
+
+.button-selected {
+  color: #21ce99;
+  font-weight: bold;
 }
 
 @media only screen and (min-width: 1000px) {
@@ -28,5 +57,13 @@
 
   .ticker-heading {
     font-size: 20px;
+  }
+
+  .chart-button-container {
+    padding: 20px 0;
+  }
+
+  .chart-button-container > button:first-of-type {
+    padding-left: 30px;
   }
 }
