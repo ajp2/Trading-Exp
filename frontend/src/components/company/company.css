@@ -21,9 +21,13 @@
 
 .chart-button-container > button {
   margin: 0 3px;
-  padding-top: 8px;
+  padding-top: 10px;
   background: #fff;
   border: none;
+}
+
+.chart-button-container > button:first-of-type {
+  padding-left: 15px;
 }
 
 .chart-button-container > button:hover {
@@ -37,6 +41,7 @@
 
 .company .description {
   margin-top: 20px;
+  padding: 0 15px;
 }
 
 .button-selected {

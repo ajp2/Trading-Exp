@@ -152,6 +152,7 @@ export class Company extends Component {
           });
           break;
         default:
+          // Differentiate between 1, 5, and 10 years
           const years = Number(buttonTxt.split(" ")[0]);
           this.setState({ timeFormat: "monthly" }, () => {
             const [labels, data] = this.getCompanyPrices();
@@ -168,7 +169,6 @@ export class Company extends Component {
 
   render() {
     if (!this.state.fetchedInfo) return false;
-    console.log(this.state);
 
     return (
       <div className="company">

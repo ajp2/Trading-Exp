@@ -41,6 +41,5 @@ export const displayYearlyPrices = (labels, prices, years) => {
   if (length < months) return [labels, prices];
   const formattedLabels = labels.slice(length - months);
   const formattedPrices = prices.slice(length - months);
-  console.log([formattedLabels, formattedPrices]);
   return [formattedLabels, formattedPrices];
 };
