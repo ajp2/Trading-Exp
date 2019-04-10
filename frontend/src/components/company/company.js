@@ -48,7 +48,7 @@ export class Company extends Component {
       this.ticker = newTicker;
       this.companyName = localStorage.getItem("companyName");
       this.getCompanyDescription();
-      Object.keys(this.state.apiData).forEach(timeFormat => {
+      Object.keys(this.apiData).forEach(timeFormat => {
         this.fetchTimeSeries(this.ticker, timeFormat);
       });
 
@@ -152,9 +152,14 @@ export class Company extends Component {
           });
           break;
         default:
+          const years = Number(buttonTxt.split(" ")[0]);
           this.setState({ timeFormat: "monthly" }, () => {
             const [labels, data] = this.getCompanyPrices();
-            this.setState({ labels, data });
+            const [
+              formattedLabels,
+              formattedPrices
+            ] = formatPrices.displayYearlyPrices(labels, data, years);
+            this.setState({ labels: formattedLabels, data: formattedPrices });
           });
           break;
       }
@@ -170,9 +175,9 @@ export class Company extends Component {
         <div className="company-info">
           <h3>
             {this.companyName}
-            <span className="ticker-heading">({this.ticker})</span>
+            <span className="ticker-heading"> ({this.ticker})</span>
           </h3>
-          <h3>{this.state.latestPrice}</h3>
+          <h3>{Number(this.state.latestPrice).toLocaleString()}</h3>
         </div>
         <StockPriceChart data={this.state.data} labels={this.state.labels} />
         <div

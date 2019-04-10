@@ -32,3 +32,15 @@ export const formatMonthlyPrices = apiInfo => {
   const formattedPrices = prices.map(item => item["4. close"]);
   return [times, formattedPrices];
 };
+
+export const displayMonthlyPrices = (labels, prices) => {};
+
+export const displayYearlyPrices = (labels, prices, years) => {
+  const length = labels.length;
+  const months = years * 12 + 1;
+  if (length < months) return [labels, prices];
+  const formattedLabels = labels.slice(length - months);
+  const formattedPrices = prices.slice(length - months);
+  console.log([formattedLabels, formattedPrices]);
+  return [formattedLabels, formattedPrices];
+};

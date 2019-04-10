@@ -45,7 +45,14 @@ export class StockPriceChart extends Component {
         legend: { display: false },
         tooltips: {
           mode: "index",
-          intersect: false
+          intersect: false,
+          callbacks: {
+            label: function(tooltipItem, data) {
+              let tooltipValue =
+                data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+              return parseInt(tooltipValue).toLocaleString();
+            }
+          }
         },
         hover: {
           mode: "index",
