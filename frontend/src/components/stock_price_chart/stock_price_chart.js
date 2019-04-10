@@ -5,16 +5,32 @@ import "./stock_price_chart.css";
 export class StockPriceChart extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      myChart: ""
+    };
+
+    this.displayChart = this.displayChart.bind(this);
   }
 
   componentDidMount() {
-    var ctx = document.getElementById("myChart");
+    this.displayChart(this.props.data, this.props.labels);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log("sdfsdfsd");
+    this.state.myChart.destroy();
+    this.setState({ myChart: "" });
+    this.displayChart(nextProps.data, nextProps.labels);
+  }
+
+  displayChart(data, labels) {
+    const ctx = document.getElementById("myChart");
     let myChart = new Chart(ctx, {
       type: "line",
       data: {
         datasets: [
           {
-            data: this.props.data,
+            data,
             fill: false,
             borderColor: "#21ce99",
             pointRadius: 0,
@@ -22,7 +38,7 @@ export class StockPriceChart extends Component {
             pointHitRadius: 10
           }
         ],
-        labels: this.props.labels
+        labels
       },
       options: {
         responsive: true,
@@ -57,6 +73,8 @@ export class StockPriceChart extends Component {
         }
       }
     });
+
+    this.setState({ myChart });
   }
 
   render() {

@@ -16,7 +16,9 @@ export class Company extends Component {
       latestPrice: "",
       timeFormat: "intraday",
       fetchedInfo: false,
-      description: ""
+      description: "",
+      labels: [],
+      data: []
     };
 
     this.fetchTimeSeries = this.fetchTimeSeries.bind(this);
@@ -88,9 +90,12 @@ export class Company extends Component {
           const latestPrice = this.state.companyInfo["intraday"][1][lastItem][
             "4. close"
           ];
+          const [labels, data] = this.getCompanyPrices();
           this.setState({
             latestPrice,
-            fetchedInfo: true
+            fetchedInfo: true,
+            labels,
+            data
           });
         }
       }
@@ -98,7 +103,6 @@ export class Company extends Component {
   }
 
   getCompanyPrices() {
-    console.log(this.state);
     const timeFormat = this.state.timeFormat;
     if (timeFormat === "intraday") {
       return formatPrices.formatIntradayPrices(
@@ -135,13 +139,15 @@ export class Company extends Component {
       const buttonTxt = e.target.innerText;
       switch (buttonTxt) {
         case "1 Day":
-          this.setState({
-            timeFormat: "intraday"
+          this.setState({ timeFormat: "intraday" }, () => {
+            const [labels, data] = this.getCompanyPrices();
+            this.setState({ labels, data });
           });
           break;
         case "1 Month":
-          this.setState({
-            timeFormat: "daily"
+          this.setState({ timeFormat: "daily" }, () => {
+            const [labels, data] = this.getCompanyPrices();
+            this.setState({ labels, data });
           });
           break;
         default:
@@ -153,8 +159,7 @@ export class Company extends Component {
 
   render() {
     if (!this.state.fetchedInfo) return false;
-    const [labels, data] = this.getCompanyPrices();
-    console.log([labels, data]);
+    console.log(this.state);
 
     return (
       <div className="company">
@@ -165,7 +170,7 @@ export class Company extends Component {
           </h3>
           <h3>{this.state.latestPrice}</h3>
         </div>
-        <StockPriceChart data={data} labels={labels} />
+        <StockPriceChart data={this.state.data} labels={this.state.labels} />
         <div
           className="chart-button-container"
           onClick={this.handleButtonClick}
