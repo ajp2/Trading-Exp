@@ -6,12 +6,14 @@ import {
   fetchCompanyDescription
 } from "../../util/shares_api_util";
 import StockPriceChart from "../stock_price_chart/stock_price_chart";
+import * as formatPrices from "../../util/format_prices";
 
 export class Company extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      companyInfo: "",
+      companyInfo: {},
+      latestPrice: "",
       timeFormat: "intraday",
       fetchedInfo: false,
       description: ""
@@ -21,6 +23,10 @@ export class Company extends Component {
     this.getCompanyPrices = this.getCompanyPrices.bind(this);
     this.getCompanyDescription = this.getCompanyDescription.bind(this);
     this.handleButtonClick = this.handleButtonClick.bind(this);
+    this.apiData = {
+      intraday: "Time Series (5min)",
+      daily: "Time Series (Daily)"
+    };
   }
 
   componentDidMount() {
@@ -28,7 +34,9 @@ export class Company extends Component {
     this.ticker = query;
     this.companyName = localStorage.getItem("companyName");
     this.getCompanyDescription();
-    this.fetchTimeSeries(this.ticker, "intraday");
+    Object.keys(this.apiData).forEach(timeFormat => {
+      this.fetchTimeSeries(this.ticker, timeFormat);
+    });
   }
 
   componentDidUpdate() {
@@ -37,12 +45,24 @@ export class Company extends Component {
       this.ticker = newTicker;
       this.companyName = localStorage.getItem("companyName");
       this.getCompanyDescription();
-      this.fetchTimeSeries(this.ticker, "intraday");
+      Object.keys(this.state.apiData).forEach(timeFormat => {
+        this.fetchTimeSeries(this.ticker, timeFormat);
+      });
+
+      // Reset chart button styling
+      document
+        .querySelectorAll(".chart-button-container button")
+        .forEach(el => {
+          el.classList.remove("button-selected");
+        });
+      document
+        .querySelector(".chart-button-container button")
+        .classList.add("button-selected");
     }
   }
 
   fetchTimeSeries(query, timeFormat) {
-    getTimesSeries(query, timeFormat).then(res => {
+    return getTimesSeries(query, timeFormat).then(res => {
       // Error can only occur by following link from dropdown.
       // So state.name will always exist if error occurs
       if (res.data["Error Message"]) {
@@ -55,23 +75,42 @@ export class Company extends Component {
           }
         });
       } else {
-        this.setState({ companyInfo: res.data, fetchedInfo: true });
+        this.setState(prevState => ({
+          companyInfo: {
+            ...prevState.companyInfo,
+            [timeFormat]: formatPrices.objectToArray(
+              res.data[this.apiData[timeFormat]]
+            )
+          }
+        }));
+        if (timeFormat === "intraday") {
+          const lastItem = this.state.companyInfo["intraday"][1].length - 1;
+          const latestPrice = this.state.companyInfo["intraday"][1][lastItem][
+            "4. close"
+          ];
+          this.setState({
+            latestPrice,
+            fetchedInfo: true
+          });
+        }
       }
     });
   }
 
   getCompanyPrices() {
-    const companyInfo = this.state.companyInfo["Time Series (5min)"];
-    const times = Object.keys(companyInfo)
-      .sort()
-      .slice(22);
-    const formattedTimes = times.map(time => time.split(" ")[1]);
-    formattedTimes.unshift("09:00:00");
-    const prices = times.map(time => companyInfo[time]);
-    const formattedPrices = prices.map(item => item["4. close"]);
-    formattedPrices.unshift(prices[0]["1. open"]);
-
-    return [formattedTimes, formattedPrices];
+    console.log(this.state);
+    const timeFormat = this.state.timeFormat;
+    if (timeFormat === "intraday") {
+      return formatPrices.formatIntradayPrices(
+        this.state.companyInfo[timeFormat]
+      );
+    } else if (timeFormat === "daily") {
+      return formatPrices.formatDailyPrices(this.state.companyInfo[timeFormat]);
+    } else if (timeFormat === "monthly") {
+      return formatPrices.formatMonthlyPrices(
+        this.state.companyInfo[timeFormat]
+      );
+    }
   }
 
   getCompanyDescription() {
@@ -83,6 +122,7 @@ export class Company extends Component {
   }
 
   handleButtonClick(e) {
+    // Only if button is clicked (not div)
     if (!e.target.classList.contains("chart-button-container")) {
       document
         .querySelectorAll(".chart-button-container button")
@@ -90,12 +130,31 @@ export class Company extends Component {
           el.classList.remove("button-selected");
         });
       e.target.classList.add("button-selected");
+
+      // Fetch relevant data
+      const buttonTxt = e.target.innerText;
+      switch (buttonTxt) {
+        case "1 Day":
+          this.setState({
+            timeFormat: "intraday"
+          });
+          break;
+        case "1 Month":
+          this.setState({
+            timeFormat: "daily"
+          });
+          break;
+        default:
+          this.setState({ timeFormat: "monthly" });
+          break;
+      }
     }
   }
 
   render() {
     if (!this.state.fetchedInfo) return false;
     const [labels, data] = this.getCompanyPrices();
+    console.log([labels, data]);
 
     return (
       <div className="company">
@@ -104,13 +163,7 @@ export class Company extends Component {
             {this.companyName}
             <span className="ticker-heading">({this.ticker})</span>
           </h3>
-          <h3>
-            {
-              this.state.companyInfo["Time Series (5min)"][
-                Object.keys(this.state.companyInfo["Time Series (5min)"])[0]
-              ]["4. close"]
-            }
-          </h3>
+          <h3>{this.state.latestPrice}</h3>
         </div>
         <StockPriceChart data={data} labels={labels} />
         <div
@@ -118,7 +171,6 @@ export class Company extends Component {
           onClick={this.handleButtonClick}
         >
           <button className="button-selected">1 Day</button>
-          <button>1 Week</button>
           <button>1 Month</button>
           <button>1 Year</button>
           <button>5 Years</button>

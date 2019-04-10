@@ -21,7 +21,7 @@ router.get("/timeseries", (req, res) => {
   if (timeFormat === "TIME_SERIES_INTRADAY") {
     apiURL = `https://www.alphavantage.co/query?function=${timeFormat}&symbol=${ticker}&interval=5min&apikey=${alphaVantageAPI}`;
   } else if (timeFormat === "TIME_SERIES_DAILY") {
-    apiURL = `https://www.alphavantage.co/query?function=${timeFormat}&symbol=${ticker}&outputsize=full&apikey=${alphaVantageAPI}`;
+    apiURL = `https://www.alphavantage.co/query?function=${timeFormat}&symbol=${ticker}&apikey=${alphaVantageAPI}`;
   } else if (timeFormat === "TIME_SERIES_MONTHLY") {
     apiURL = `https://www.alphavantage.co/query?function=${timeFormat}&symbol=${ticker}&apikey=${alphaVantageAPI}`;
   }
