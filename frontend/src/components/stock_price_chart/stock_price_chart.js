@@ -17,7 +17,6 @@ export class StockPriceChart extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("sdfsdfsd");
     this.state.myChart.destroy();
     this.setState({ myChart: "" });
     this.displayChart(nextProps.data, nextProps.labels);

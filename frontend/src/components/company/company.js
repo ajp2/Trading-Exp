@@ -27,7 +27,8 @@ export class Company extends Component {
     this.handleButtonClick = this.handleButtonClick.bind(this);
     this.apiData = {
       intraday: "Time Series (5min)",
-      daily: "Time Series (Daily)"
+      daily: "Time Series (Daily)",
+      monthly: "Monthly Time Series"
     };
   }
 
@@ -151,7 +152,10 @@ export class Company extends Component {
           });
           break;
         default:
-          this.setState({ timeFormat: "monthly" });
+          this.setState({ timeFormat: "monthly" }, () => {
+            const [labels, data] = this.getCompanyPrices();
+            this.setState({ labels, data });
+          });
           break;
       }
     }
