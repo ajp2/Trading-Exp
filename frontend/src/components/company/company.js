@@ -7,6 +7,7 @@ import {
 } from "../../util/shares_api_util";
 import StockPriceChart from "../stock_price_chart/stock_price_chart";
 import * as formatPrices from "../../util/format_prices";
+import Transaction from "../transaction/transaction";
 
 export class Company extends Component {
   constructor(props) {
@@ -121,7 +122,10 @@ export class Company extends Component {
   getCompanyDescription() {
     fetchCompanyDescription(this.companyName).then(res => {
       if (res.data.success) {
+        console.log(res.data.other);
         this.setState({ description: res.data.description });
+      } else {
+        this.setState({ description: "" });
       }
     });
   }
@@ -179,7 +183,9 @@ export class Company extends Component {
           </h3>
           <h3>{Number(this.state.latestPrice).toLocaleString()}</h3>
         </div>
+
         <StockPriceChart data={this.state.data} labels={this.state.labels} />
+
         <div
           className="chart-button-container"
           onClick={this.handleButtonClick}
@@ -191,7 +197,10 @@ export class Company extends Component {
           <button>10 Years</button>
         </div>
 
-        <p className="description">{this.state.description}</p>
+        <div className="mid-container">
+          <p className="description">{this.state.description}</p>
+          <Transaction />
+        </div>
         <News />
       </div>
     );

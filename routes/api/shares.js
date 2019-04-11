@@ -36,20 +36,28 @@ router.get("/description", (req, res) => {
       response => {
         if (response.status === 200) {
           const html = response.data;
-          const $ = cheerio.load(html);
-          const knowledgeGraph = $(".mraOPb");
-          if (knowledgeGraph.length > 0) {
-            knowledgeGraph.each((idx, el) => {
-              const description = el.children[0].children[0].data;
-              res.json({ success: true, description });
-            });
-          } else {
-            res.json({ success: false });
-          }
+          const resultObj = findInfo(html);
+          res.json(resultObj);
         }
       },
       err => console.log(err)
     );
 });
+
+function findInfo(html) {
+  let result = {};
+  const $ = cheerio.load(html);
+
+  const descriptionEl = $(".mraOPb");
+  if (descriptionEl.length > 0) {
+    descriptionEl.each((idx, el) => {
+      const description = el.children[0].children[0].data;
+      result.description = description;
+    });
+  }
+
+  result.success = Object.keys(result).length > 0 ? true : false;
+  return result;
+}
 
 module.exports = router;

@@ -1,0 +1,43 @@
+.transaction {
+  width: 300px;
+  height: 350px;
+  margin: 20px auto;
+  border: 1px solid #000;
+}
+
+.transaction-buttons > button {
+  width: 50%;
+  height: 50px;
+  font-size: 16px;
+  border: none;
+  border-bottom: 1px solid #000;
+}
+
+.transaction-buttons > button:hover {
+  cursor: pointer;
+}
+
+.transaction-buttons > button:focus {
+  outline: none;
+}
+
+.transaction-buttons > button:first-of-type {
+  border-right: 1px solid #000;
+}
+
+.buy,
+.sell {
+  background: #fff;
+}
+
+.button-green {
+  background: #21ce99;
+  color: #fff;
+  font-weight: bold;
+}
+
+.button-red {
+  background: #fe4747;
+  color: #fff;
+  font-weight: bold;
+}
