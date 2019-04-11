@@ -50,7 +50,7 @@ export class StockPriceChart extends Component {
             label: function(tooltipItem, data) {
               let tooltipValue =
                 data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-              return parseInt(tooltipValue).toLocaleString();
+              return parseFloat(tooltipValue).toLocaleString();
             }
           }
         },

@@ -33,6 +33,35 @@ export class Transaction extends Component {
           <button className="buy button-green">Buy</button>
           <button className="sell">Sell</button>
         </div>
+
+        <div className="transaction-info">
+          <p>
+            Owned: <span className="value">0</span>
+          </p>
+          <label>
+            Shares
+            <input type="number" placeholder="0" />
+          </label>
+          <p>
+            Market Price <span className="value">100</span>
+          </p>
+          <p>
+            {this.state.activeButton ? "Cost" : "Proceeds"}
+            <span className="value">100</span>
+          </p>
+          <p>
+            Available Funds <span className="value">1,000,000</span>
+          </p>
+        </div>
+
+        {this.state.activeButton ? (
+          <button className="submit buy-button">Buy</button>
+        ) : (
+          <button className="submit sell-button">Sell</button>
+        )}
+
+        {/* Check if in watchlist */}
+        <button className="watchlist">Add to Watchlist</button>
       </div>
     );
   }

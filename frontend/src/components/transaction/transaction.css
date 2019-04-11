@@ -42,3 +42,93 @@
   color: #fff;
   font-weight: bold;
 }
+
+.transaction-info {
+  padding-left: 35px;
+}
+
+.transaction-info p,
+.transaction-info label {
+  display: block;
+  padding-top: 20px;
+}
+
+.transaction-info .value {
+  float: right;
+  padding-right: 35px;
+}
+
+.transaction-info input {
+  width: 40px;
+  float: right;
+  margin-right: 35px;
+  text-align: right;
+  padding: 3px;
+}
+
+.transaction-info input {
+  width: 40px;
+  float: right;
+  margin-right: 35px;
+  text-align: right;
+  padding: 3px;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+.transaction-info input:focus {
+  outline-color: #21ce99;
+}
+
+.transaction .submit {
+  margin-left: 35px;
+  margin-top: 20px;
+  padding: 10px 102px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+}
+
+.transaction .submit:hover {
+  cursor: pointer;
+}
+
+.transaction .submit:focus {
+  outline-color: none;
+}
+
+.buy-button {
+  background: #1db889;
+}
+
+.sell-button {
+  background: #fe4747;
+}
+
+.watchlist {
+  display: block;
+  border: 1px solid #21ce99;
+  padding: 10px 59px;
+  background: #fff;
+  color: #1db889;
+  font-size: 16px;
+  border-radius: 7px;
+  margin: 10px auto;
+}
+
+.watchlist:hover {
+  cursor: pointer;
+  border: 1px solid #1de4a8;
+  color: #1de4a8;
+}

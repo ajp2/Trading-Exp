@@ -26,14 +26,14 @@ export class Company extends Component {
     this.getCompanyPrices = this.getCompanyPrices.bind(this);
     this.getCompanyDescription = this.getCompanyDescription.bind(this);
     this.handleButtonClick = this.handleButtonClick.bind(this);
+  }
+
+  componentDidMount() {
     this.apiData = {
       intraday: "Time Series (5min)",
       daily: "Time Series (Daily)",
       monthly: "Monthly Time Series"
     };
-  }
-
-  componentDidMount() {
     const query = this.props.match.params.ticker;
     this.ticker = query;
     this.companyName = localStorage.getItem("companyName");
