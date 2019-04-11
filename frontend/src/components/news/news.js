@@ -28,13 +28,18 @@ export class News extends Component {
             className="news-item"
             key={idx}
           >
-            <img src={article.urlToImage} alt="News article" />
+            <div className="article-image">
+              <img src={article.urlToImage} alt="News article" />
+            </div>
             <div className="news-content">
               <h3>{article.title.split(" - ")[0]}</h3>
               <p>{article.description}</p>
             </div>
           </a>
         ))}
+        <a href="https://newsapi.org/" className="footnote">
+          Powered by News API
+        </a>
       </div>
     );
   }

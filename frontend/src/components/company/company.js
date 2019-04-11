@@ -198,7 +198,14 @@ export class Company extends Component {
         </div>
 
         <div className="mid-container">
-          <p className="description">{this.state.description}</p>
+          {this.state.description ? (
+            <div className="description">
+              <h2>About: </h2>
+              <p>{this.state.description}</p>
+            </div>
+          ) : (
+            false
+          )}
           <Transaction />
         </div>
         <News />

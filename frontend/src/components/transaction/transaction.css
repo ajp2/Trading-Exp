@@ -1,7 +1,7 @@
 .transaction {
   width: 300px;
   height: 350px;
-  margin: 20px auto;
+  margin: 25px auto;
   border: 1px solid #000;
 }
 
@@ -15,6 +15,7 @@
 
 .transaction-buttons > button:hover {
   cursor: pointer;
+  font-weight: bold;
 }
 
 .transaction-buttons > button:focus {
