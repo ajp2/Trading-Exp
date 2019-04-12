@@ -100,7 +100,14 @@ input[type="number"]::-webkit-outer-spin-button {
   outline: none;
 }
 
-.transaction .submit:hover {
+button:disabled {
+  cursor: not-allowed;
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
+.transaction .submit:hover:enabled {
   cursor: pointer;
 }
 
