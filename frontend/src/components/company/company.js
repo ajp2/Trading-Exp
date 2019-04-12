@@ -41,6 +41,16 @@ export class Company extends Component {
     Object.keys(this.apiData).forEach(timeFormat => {
       this.fetchTimeSeries(this.ticker, timeFormat);
     });
+
+    // Fetch updated information every 5 minutes (only for intraday values)
+    this.timer = setInterval(
+      () => this.fetchTimeSeries(this.ticker, "intraday"),
+      300000
+    );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
   }
 
   componentDidUpdate() {
@@ -206,7 +216,10 @@ export class Company extends Component {
           ) : (
             false
           )}
-          <Transaction />
+          <Transaction
+            ticker={this.ticker}
+            latestPrice={this.state.latestPrice}
+          />
         </div>
         <News />
       </div>

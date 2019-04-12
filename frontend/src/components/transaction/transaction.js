@@ -14,7 +14,6 @@ export class Transaction extends Component {
   }
 
   handleButtonClick(e) {
-    console.log(this.state);
     if (e.target.classList.contains("buy") && !this.state.activeButton) {
       e.target.classList.add("button-green");
       document.querySelector(".sell").classList.remove("button-red");
@@ -43,7 +42,7 @@ export class Transaction extends Component {
             <input type="number" placeholder="0" />
           </label>
           <p>
-            Market Price <span className="value">100</span>
+            Market Price <span className="value">{this.props.latestPrice}</span>
           </p>
           <p>
             {this.state.activeButton ? "Cost" : "Proceeds"}
