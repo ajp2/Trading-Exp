@@ -12,7 +12,8 @@ export class Transaction extends Component {
       shares: "",
       totalValue: 0,
       errors: "",
-      ownedShares: ""
+      ownedShares: "",
+      watchlist: true
     };
 
     this.handleButtonClick = this.handleButtonClick.bind(this);
@@ -26,9 +27,16 @@ export class Transaction extends Component {
     this.fetchOwnedShares();
   }
 
+  componentDidUpdate() {
+    this.fetchOwnedShares();
+  }
+
   fetchOwnedShares() {
     getOwnedShares(this.props.user_id, this.props.ticker).then(res =>
-      console.log(res.data)
+      this.setState({
+        ownedShares: res.data.ownedShares,
+        watchlist: res.data.watchlist
+      })
     );
   }
 
@@ -64,14 +72,18 @@ export class Transaction extends Component {
   }
 
   checkErrors() {
-    // TODO: set owned shares;
     let errors;
+    // Check if purchase is greater than available cash
     if (
       this.state.activeButton &&
       this.state.totalValue > this.props.total_cash
     ) {
       errors = "Insufficient funds";
-    } else if (!this.state.activeButton && this.state.shares > 0) {
+      // Check if selling too many shares
+    } else if (
+      !this.state.activeButton &&
+      this.state.shares > this.state.ownedShares
+    ) {
       errors = "You do not own that many shares";
     } else {
       errors = "";
@@ -92,7 +104,7 @@ export class Transaction extends Component {
 
         <div className="transaction-info">
           <p>
-            Owned: <span className="value">0</span>
+            Owned: <span className="value">{this.state.ownedShares}</span>
           </p>
           <label>
             Shares
@@ -120,7 +132,11 @@ export class Transaction extends Component {
           </p>
         </div>
 
-        {this.state.errors ? <p>{this.state.errors}</p> : false}
+        {this.state.errors ? (
+          <p className="transaction-errors">{this.state.errors}</p>
+        ) : (
+          false
+        )}
 
         <button
           className={`submit ${
@@ -131,8 +147,11 @@ export class Transaction extends Component {
           {this.state.activeButton ? "Buy" : "Sell"}
         </button>
 
-        {/* Check if in watchlist */}
-        <button className="watchlist">Add to Watchlist</button>
+        {!this.state.wathclist ? (
+          <button className="watchlist">Add to Watchlist</button>
+        ) : (
+          false
+        )}
       </div>
     );
   }

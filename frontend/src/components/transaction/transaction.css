@@ -1,6 +1,6 @@
 .transaction {
   width: 300px;
-  height: 350px;
+  height: 365px;
   margin: 25px auto;
   border: 1px solid #000;
 }
@@ -50,20 +50,12 @@
 .transaction-info p,
 .transaction-info label {
   display: block;
-  padding-top: 20px;
+  padding-top: 17px;
 }
 
 .transaction-info .value {
   float: right;
   padding-right: 35px;
-}
-
-.transaction-info input {
-  width: 40px;
-  float: right;
-  margin-right: 35px;
-  text-align: right;
-  padding: 3px;
 }
 
 .transaction-info input {
@@ -86,6 +78,14 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .transaction-info input:focus {
   outline-color: #21ce99;
+}
+
+.transaction-errors {
+  color: #fe4747;
+  font-size: 14px;
+  font-weight: bold;
+  padding-left: 35px;
+  padding-top: 8px;
 }
 
 .transaction .submit {
@@ -126,12 +126,13 @@ button:disabled {
 .watchlist {
   display: block;
   border: 1px solid #21ce99;
-  padding: 10px 59px;
+  padding: 10px 58px;
   background: #fff;
   color: #1db889;
   font-size: 16px;
   border-radius: 7px;
-  margin: 10px auto;
+  margin: 0 auto;
+  margin-top: 15px;
 }
 
 .watchlist:hover {
