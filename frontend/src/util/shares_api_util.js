@@ -26,3 +26,6 @@ export const fetchCompanyDescription = companyName =>
 
 export const getOwnedShares = (user_id, ticker) =>
   axios.get(`/api/shares/${ticker}`, { params: { user_id } });
+
+export const updateShareInfo = (user_id, ticker, infoObj) =>
+  axios.post(`/api/shares/${ticker}`, { info: infoObj, ticker, user_id });

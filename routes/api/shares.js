@@ -78,6 +78,9 @@ router.get("/:ticker", (req, res) => {
 });
 
 router.post("/:ticker", (req, res) => {
+  console.log(req.body.ticker);
+  console.log(req.body.user_id);
+  console.log(req.body.info);
   // Add/subtract to owned shares
   // Share.find({ user: id, ticker })
   // Create a Trade record

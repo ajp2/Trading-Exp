@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./transaction.css";
-import { getOwnedShares } from "../../util/shares_api_util";
+import { getOwnedShares, updateShareInfo } from "../../util/shares_api_util";
 
 export class Transaction extends Component {
   constructor(props) {
@@ -13,14 +13,16 @@ export class Transaction extends Component {
       totalValue: 0,
       errors: "",
       ownedShares: "",
-      watchlist: true
+      watchlist: false
     };
 
     this.handleButtonClick = this.handleButtonClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleWatchlistSubmit = this.handleWatchlistSubmit.bind(this);
     this.checkErrors = this.checkErrors.bind(this);
     this.fetchOwnedShares = this.fetchOwnedShares.bind(this);
+    this.submitShareInfo = this.submitShareInfo.bind(this);
   }
 
   componentDidMount() {
@@ -38,6 +40,10 @@ export class Transaction extends Component {
         watchlist: res.data.watchlist
       })
     );
+  }
+
+  submitShareInfo(infoObj) {
+    return updateShareInfo(this.props.user_id, this.props.ticker, infoObj);
   }
 
   handleButtonClick(e) {
@@ -67,8 +73,33 @@ export class Transaction extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    // get owned shares and add/subtract this.state.shares to that value
-    // if error caused by insufficient funds/shares, send error message
+    if (!this.state.shares || Number(this.state.shares) <= 0) return;
+
+    let updatedShares;
+    if (this.state.activeButton) {
+      updatedShares = this.state.ownedShares + Number(this.state.shares);
+    } else {
+      updatedShares = this.state.ownedShares - Number(this.state.shares);
+    }
+
+    const info = {
+      shares: updatedShares
+    };
+
+    this.submitShareInfo(info).then(() => {
+      this.setState({ shares: "" });
+      this.fetchOwnedShares();
+    });
+  }
+
+  handleWatchlistSubmit(e) {
+    const info = {
+      watchlist: true
+    };
+
+    this.submitShareInfo(info).then(() => {
+      this.fetchOwnedShares();
+    });
   }
 
   checkErrors() {
@@ -102,7 +133,7 @@ export class Transaction extends Component {
           <button className="sell">Sell</button>
         </div>
 
-        <div className="transaction-info">
+        <form className="transaction-info" onSubmit={this.handleSubmit}>
           <p>
             Owned: <span className="value">{this.state.ownedShares}</span>
           </p>
@@ -130,25 +161,27 @@ export class Transaction extends Component {
               {this.props.total_cash.toLocaleString()}
             </span>
           </p>
-        </div>
 
-        {this.state.errors ? (
-          <p className="transaction-errors">{this.state.errors}</p>
-        ) : (
-          false
-        )}
+          {this.state.errors ? (
+            <p className="transaction-errors">{this.state.errors}</p>
+          ) : (
+            false
+          )}
 
-        <button
-          className={`submit ${
-            this.state.activeButton ? "buy-button" : "sell-button"
-          }`}
-          onSubmit={this.handleSubmit}
-        >
-          {this.state.activeButton ? "Buy" : "Sell"}
-        </button>
+          <button
+            className={`submit ${
+              this.state.activeButton ? "buy-button" : "sell-button"
+            }`}
+          >
+            {this.state.activeButton ? "Buy" : "Sell"}
+          </button>
+        </form>
 
-        {!this.state.wathclist ? (
-          <button className="watchlist">Add to Watchlist</button>
+        {/* Show button only if not in watchlist and no owned shares */}
+        {!this.state.watchlist || this.state.ownedShares ? (
+          <button className="watchlist" onClick={this.handleWatchlistSubmit}>
+            Add to Watchlist
+          </button>
         ) : (
           false
         )}
