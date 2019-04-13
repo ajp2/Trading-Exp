@@ -60,4 +60,16 @@ function findInfo(html) {
   return result;
 }
 
+router.get("/:ticker", (req, res) => {
+  // get ticker and username/id and search db
+  // Share.find({ user: id, ticker })
+  // if result, return owned shares, otherwise return 0
+});
+
+router.post("/:ticker", (req, res) => {
+  // Add/subtract to owned shares
+  // Share.find({ user: id, ticker })
+  // Create a Trade record
+});
+
 module.exports = router;

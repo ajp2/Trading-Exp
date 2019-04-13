@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const db = require("./config/keys").mongoURI;
+const passport = require("passport");
 const users = require("./routes/api/users");
 const shares = require("./routes/api/shares");
 const news = require("./routes/api/news");
@@ -14,6 +15,9 @@ mongoose
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+app.use(passport.initialize());
+require("./config/passport")(passport);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("frontend/build"));
