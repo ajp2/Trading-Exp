@@ -7,7 +7,7 @@ import {
 } from "../../util/shares_api_util";
 import StockPriceChart from "../stock_price_chart/stock_price_chart";
 import * as formatPrices from "../../util/format_prices";
-import Transaction from "../transaction/transaction";
+import TransactionContainer from "../transaction/transaction_container";
 
 export class Company extends Component {
   constructor(props) {
@@ -216,7 +216,7 @@ export class Company extends Component {
           ) : (
             false
           )}
-          <Transaction
+          <TransactionContainer
             ticker={this.ticker}
             latestPrice={this.state.latestPrice}
           />

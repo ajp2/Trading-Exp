@@ -23,3 +23,6 @@ export const fetchCompanyDescription = companyName =>
   axios.get("/api/shares/description", {
     params: { companyName }
   });
+
+export const getOwnedShares = (user_id, ticker) =>
+  axios.get(`/api/shares/${ticker}`, { params: { user_id } });

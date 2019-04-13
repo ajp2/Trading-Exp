@@ -3,6 +3,7 @@ const router = express.Router();
 const alphaVantageAPI = require("../../config/keys").alphaVantage;
 const axios = require("axios");
 const cheerio = require("cheerio");
+const Share = require("../../models/Share");
 
 router.get("/search", (req, res) => {
   axios
@@ -61,9 +62,19 @@ function findInfo(html) {
 }
 
 router.get("/:ticker", (req, res) => {
-  // get ticker and username/id and search db
-  // Share.find({ user: id, ticker })
-  // if result, return owned shares, otherwise return 0
+  const ticker = req.params.ticker;
+  const user_id = req.query.user_id;
+  Share.findOne({ ticker, user_id }).then(share => {
+    if (!share) {
+      res.json({ ownedShares: 0, watchlist: false, saved: false });
+    } else {
+      res.json({
+        ownedShares: share.owned,
+        watchlist: share.watchlist,
+        saved: true
+      });
+    }
+  });
 });
 
 router.post("/:ticker", (req, res) => {

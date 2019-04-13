@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./transaction.css";
+import { getOwnedShares } from "../../util/shares_api_util";
 
 export class Transaction extends Component {
   constructor(props) {
@@ -10,13 +11,25 @@ export class Transaction extends Component {
       activeButton: true,
       shares: "",
       totalValue: 0,
-      errors: ""
+      errors: "",
+      ownedShares: ""
     };
 
     this.handleButtonClick = this.handleButtonClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.checkErrors = this.checkErrors.bind(this);
+    this.fetchOwnedShares = this.fetchOwnedShares.bind(this);
+  }
+
+  componentDidMount() {
+    this.fetchOwnedShares();
+  }
+
+  fetchOwnedShares() {
+    getOwnedShares(this.props.user_id, this.props.ticker).then(res =>
+      console.log(res.data)
+    );
   }
 
   handleButtonClick(e) {
@@ -51,9 +64,12 @@ export class Transaction extends Component {
   }
 
   checkErrors() {
-    // TODO: set available funds & owned shares;
+    // TODO: set owned shares;
     let errors;
-    if (this.state.activeButton && this.state.totalValue > 1000000) {
+    if (
+      this.state.activeButton &&
+      this.state.totalValue > this.props.total_cash
+    ) {
       errors = "Insufficient funds";
     } else if (!this.state.activeButton && this.state.shares > 0) {
       errors = "You do not own that many shares";
@@ -97,7 +113,10 @@ export class Transaction extends Component {
             </span>
           </p>
           <p>
-            Available Funds <span className="value">1,000,000</span>
+            Available Funds{" "}
+            <span className="value">
+              {this.props.total_cash.toLocaleString()}
+            </span>
           </p>
         </div>
 

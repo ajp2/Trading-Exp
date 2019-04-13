@@ -17,7 +17,6 @@ class App extends Component {
       <div className="App">
         <NavBarContainer />
         <Switch>
-          <Route exact path="/" component={MainPageContainer} />
           <AuthRoute expact path="/signup" component={SignupFormContainer} />
           <AuthRoute expact path="/login" component={LoginFormContainer} />
           <ProtectedRoute exact path="/portfolio" component={Portfolio} />
@@ -27,6 +26,7 @@ class App extends Component {
             path="/stocks/:ticker"
             component={CompanyContainer}
           />
+          <Route path="/" component={MainPageContainer} />
         </Switch>
       </div>
     );
