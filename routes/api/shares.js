@@ -3,6 +3,7 @@ const router = express.Router();
 const alphaVantageAPI = require("../../config/keys").alphaVantage;
 const axios = require("axios");
 const cheerio = require("cheerio");
+const User = require("../../models/User");
 const Share = require("../../models/Share");
 const Trade = require("../../models/Trade");
 
@@ -120,7 +121,19 @@ router.post("/trade/:ticker", (req, res) => {
     price
   };
 
-  Trade.create(trade).then(() => res.json({ msg: "Created trade" }));
+  User.findOne({ _id: user_id }).then(user => {
+    console.log(user);
+    if (buy) {
+      user.total_cash -= amount * price;
+    } else {
+      user.total_cash += amount * price;
+    }
+    user.save().then(updatedUser => {
+      Trade.create(trade).then(() =>
+        res.json({ msg: "Created trade", total_cash: updatedUser.total_cash })
+      );
+    });
+  });
 });
 
 module.exports = router;

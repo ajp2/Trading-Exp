@@ -6,6 +6,7 @@ export const LOGOUT_USER = "LOGOUT_USER";
 export const RECEIVE_USER_SIGN_IN = "RECEIVE_USER_SIGN_IN";
 export const RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS";
 export const CLEAR_SESSION_ERRROS = "CLEAR_SESSION_ERRORS";
+export const UPDATE_TOTAL_CASH = "UPDATE_TOTAL_CASH";
 
 export const receiveCurrentUser = currentUser => ({
   type: RECEIVE_CURRENT_USER,
@@ -27,6 +28,11 @@ export const clearErrors = () => ({
 
 export const logoutUser = () => ({
   type: LOGOUT_USER
+});
+
+export const updateTotalCash = total_cash => ({
+  type: UPDATE_TOTAL_CASH,
+  total_cash
 });
 
 export const signup = user => dispatch =>

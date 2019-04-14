@@ -17,7 +17,8 @@ export class Transaction extends Component {
       totalValue: 0,
       errors: "",
       ownedShares: "",
-      watchlist: false
+      watchlist: false,
+      loaded: false
     };
 
     this.handleButtonClick = this.handleButtonClick.bind(this);
@@ -30,15 +31,20 @@ export class Transaction extends Component {
   }
 
   componentDidMount() {
-    this.fetchOwnedShares();
+    this.ticker = this.props.ticker;
+    this.fetchOwnedShares().then(() => this.setState({ loaded: true }));
   }
 
   componentDidUpdate() {
-    this.fetchOwnedShares();
+    if (this.ticker !== this.props.ticker) {
+      this.ticker = this.props.ticker;
+      this.setState({ loaded: false });
+      this.fetchOwnedShares().then(() => this.setState({ loaded: true }));
+    }
   }
 
   fetchOwnedShares() {
-    getOwnedShares(this.props.user_id, this.props.ticker).then(res =>
+    return getOwnedShares(this.props.user_id, this.props.ticker).then(res =>
       this.setState({
         ownedShares: res.data.ownedShares,
         watchlist: res.data.watchlist
@@ -99,9 +105,12 @@ export class Transaction extends Component {
     };
 
     this.submitShareInfo(info).then(() => {
-      createTrade(trade);
-      this.setState({ shares: "" });
-      this.fetchOwnedShares();
+      createTrade(trade).then(res => {
+        console.log(res.data);
+        this.props.updateTotalCash(res.data.total_cash);
+        this.setState({ shares: "" });
+        this.fetchOwnedShares();
+      });
     });
   }
 
@@ -139,6 +148,8 @@ export class Transaction extends Component {
   }
 
   render() {
+    if (!this.state.loaded) return false;
+
     return (
       <div className="transaction">
         <div className="transaction-buttons" onClick={this.handleButtonClick}>
