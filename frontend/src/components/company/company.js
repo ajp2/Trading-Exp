@@ -219,6 +219,7 @@ export class Company extends Component {
           <TransactionContainer
             ticker={this.ticker}
             latestPrice={this.state.latestPrice}
+            companyName={this.companyName}
           />
         </div>
         <News />

@@ -78,12 +78,49 @@ router.get("/:ticker", (req, res) => {
 });
 
 router.post("/:ticker", (req, res) => {
-  console.log(req.body.ticker);
-  console.log(req.body.user_id);
-  console.log(req.body.info);
-  // Add/subtract to owned shares
-  // Share.find({ user: id, ticker })
+  const ticker = req.body.ticker;
+  const user_id = req.body.user_id;
+  const info = req.body.info;
+
+  Share.findOne({ user_id, ticker }).then(share => {
+    if (!share) {
+      // create a share in db with set info
+      const share = {
+        user_id,
+        ticker,
+        owned: info.shares || 0,
+        watchlist: info.watchlist || false
+      };
+      Share.create(share).then(() => res.json({ msg: "Created share" }));
+    } else {
+      // update share with set info
+      if (info.shares) share.owned = info.shares;
+      if (info.watchlist) share.watchlist = info.watchlist;
+      share.save().then(() => res.json({ msg: "Updated share" }));
+    }
+  });
+});
+
+router.post("/trade/:ticker", (req, res) => {
+  const user_id = req.body.user_id;
+  const ticker = req.body.ticker;
+  const company = req.body.company;
+  const buy = req.body.buy;
+  const amount = req.body.amount;
+  const price = req.body.price;
+
   // Create a Trade record
+  const trade = {
+    user_id,
+    ticker,
+    company,
+    buy,
+    amount,
+    price
+  };
+
+  console.log(trade);
+  trade.save(trade).then(() => res.json({ msg: "Created trade" }));
 });
 
 module.exports = router;

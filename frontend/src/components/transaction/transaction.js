@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import "./transaction.css";
-import { getOwnedShares, updateShareInfo } from "../../util/shares_api_util";
+import {
+  getOwnedShares,
+  updateShareInfo,
+  createTrade
+} from "../../util/shares_api_util";
 
 export class Transaction extends Component {
   constructor(props) {
@@ -85,8 +89,17 @@ export class Transaction extends Component {
     const info = {
       shares: updatedShares
     };
+    const trade = {
+      user_id: this.props.user_id,
+      ticker: this.props.ticker,
+      company: this.props.companyName,
+      buy: this.state.activeButton,
+      amount: Number(this.state.shares),
+      price: this.props.latestPrice
+    };
 
     this.submitShareInfo(info).then(() => {
+      createTrade(trade);
       this.setState({ shares: "" });
       this.fetchOwnedShares();
     });

@@ -29,3 +29,6 @@ export const getOwnedShares = (user_id, ticker) =>
 
 export const updateShareInfo = (user_id, ticker, infoObj) =>
   axios.post(`/api/shares/${ticker}`, { info: infoObj, ticker, user_id });
+
+export const createTrade = trade =>
+  axios.post(`/api/trade/${trade.ticker}`, trade);
