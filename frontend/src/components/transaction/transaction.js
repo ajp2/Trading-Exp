@@ -106,7 +106,6 @@ export class Transaction extends Component {
 
     this.submitShareInfo(info).then(() => {
       createTrade(trade).then(res => {
-        console.log(res.data);
         this.props.updateTotalCash(res.data.total_cash);
         this.setState({ shares: "" });
         this.fetchOwnedShares();

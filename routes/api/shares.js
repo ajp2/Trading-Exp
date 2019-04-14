@@ -122,7 +122,6 @@ router.post("/trade/:ticker", (req, res) => {
   };
 
   User.findOne({ _id: user_id }).then(user => {
-    console.log(user);
     if (buy) {
       user.total_cash -= amount * price;
     } else {

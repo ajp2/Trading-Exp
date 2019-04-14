@@ -132,7 +132,6 @@ export class Company extends Component {
   getCompanyDescription() {
     fetchCompanyDescription(this.companyName).then(res => {
       if (res.data.success) {
-        console.log(res.data.other);
         this.setState({ description: res.data.description });
       } else {
         this.setState({ description: "" });
