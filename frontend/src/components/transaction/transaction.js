@@ -208,6 +208,15 @@ export class Transaction extends Component {
         ) : (
           false
         )}
+
+        {/* Show remove button if in watchlist */}
+        {this.state.watchlist ? (
+          <button className="watchlist watchlist--remove">
+            Remove from Watchlist
+          </button>
+        ) : (
+          false
+        )}
       </div>
     );
   }

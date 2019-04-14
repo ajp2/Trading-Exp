@@ -84,7 +84,8 @@ input[type="number"]::-webkit-outer-spin-button {
   color: #fe4747;
   font-size: 14px;
   font-weight: bold;
-  padding-top: 8px;
+  padding-top: 6px;
+  margin-bottom: -10px;
 }
 
 .transaction .submit {
@@ -129,7 +130,7 @@ button:disabled {
   color: #1db889;
   font-size: 16px;
   border-radius: 7px;
-  margin: 0 auto;
+  margin-left: 35px;
   margin-top: 15px;
 }
 
@@ -137,4 +138,8 @@ button:disabled {
   cursor: pointer;
   border: 1px solid #1de4a8;
   color: #1de4a8;
+}
+
+.watchlist--remove {
+  padding: 10px 35px;
 }
