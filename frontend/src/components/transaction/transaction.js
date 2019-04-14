@@ -191,7 +191,7 @@ export class Transaction extends Component {
         </form>
 
         {/* Show button only if not in watchlist and no owned shares */}
-        {!this.state.watchlist || this.state.ownedShares ? (
+        {!this.state.watchlist && !this.state.ownedShares ? (
           <button className="watchlist" onClick={this.handleWatchlistSubmit}>
             Add to Watchlist
           </button>

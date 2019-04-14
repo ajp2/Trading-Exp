@@ -4,6 +4,7 @@ const alphaVantageAPI = require("../../config/keys").alphaVantage;
 const axios = require("axios");
 const cheerio = require("cheerio");
 const Share = require("../../models/Share");
+const Trade = require("../../models/Trade");
 
 router.get("/search", (req, res) => {
   axios
@@ -119,8 +120,7 @@ router.post("/trade/:ticker", (req, res) => {
     price
   };
 
-  console.log(trade);
-  trade.save(trade).then(() => res.json({ msg: "Created trade" }));
+  Trade.create(trade).then(() => res.json({ msg: "Created trade" }));
 });
 
 module.exports = router;
