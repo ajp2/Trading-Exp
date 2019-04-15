@@ -10,6 +10,7 @@ import LoginFormContainer from "./session/login_form_container";
 import Portfolio from "./portfolio/portfolio";
 import SearchContainer from "./search/search_container";
 import CompanyContainer from "../components/company/company_container";
+import TradesContainer from "../components/trades/trades_container";
 
 class App extends Component {
   render() {
@@ -21,12 +22,13 @@ class App extends Component {
           <AuthRoute expact path="/login" component={LoginFormContainer} />
           <ProtectedRoute exact path="/portfolio" component={Portfolio} />
           <ProtectedRoute exact path="/search" component={SearchContainer} />
+          <ProtectedRoute exact path="/trades" component={TradesContainer} />
           <ProtectedRoute
             exact
             path="/stocks/:ticker"
             component={CompanyContainer}
           />
-          <Route path="/" component={MainPageContainer} />
+          <Route exact path="/" component={MainPageContainer} />
         </Switch>
       </div>
     );

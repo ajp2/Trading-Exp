@@ -6,9 +6,11 @@ const Trade = require("../../models/Trade");
 // Get all trades for a given user
 router.get("/", (req, res) => {
   const user_id = req.query.user_id;
-  Trade.find({ user_id }).then(trades => {
-    res.json(trades);
-  });
+  Trade.find({ user_id })
+    .sort({ date: -1 })
+    .then(trades => {
+      res.json(trades);
+    });
 });
 
 router.post("/:ticker", (req, res) => {
