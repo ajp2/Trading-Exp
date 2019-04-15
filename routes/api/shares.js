@@ -62,6 +62,15 @@ function findInfo(html) {
   return result;
 }
 
+router.get("/", (req, res) => {
+  const user_id = req.query.user_id;
+  Share.find({ user_id })
+    .sort({ company: 1 })
+    .then(shares => {
+      res.json(shares);
+    });
+});
+
 router.get("/:ticker", (req, res) => {
   const ticker = req.params.ticker;
   const user_id = req.query.user_id;

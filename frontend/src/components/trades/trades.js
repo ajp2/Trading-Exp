@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getTrades } from "../../util/shares_api_util";
+import { getTrades, getShares } from "../../util/shares_api_util";
 import "./trades.css";
 
 export class Trades extends Component {
@@ -14,6 +14,7 @@ export class Trades extends Component {
     getTrades(this.props.user_id).then(res =>
       this.setState({ trades: res.data })
     );
+    getShares(this.props.user_id).then(res => console.log(res.data));
   }
 
   formatDate(dateStr) {
