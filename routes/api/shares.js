@@ -103,6 +103,7 @@ router.post("/:ticker", (req, res) => {
   const company = info.company;
 
   Share.findOne({ user_id, ticker }).then(share => {
+    console.log(!share.watchlist && info.shares <= 0);
     if (!share) {
       // create a share in db with set info
       const share = {
@@ -114,11 +115,16 @@ router.post("/:ticker", (req, res) => {
       };
       Share.create(share).then(() => res.json({ msg: "Created share" }));
     } else {
-      // update share with set info
-      if (info.shares) share.owned = info.shares;
-      share.company = company;
-      if (info.watchlist) share.watchlist = info.watchlist;
-      share.save().then(() => res.json({ msg: "Updated share" }));
+      // remove from db if not in watchlist and owned shares are 0
+      if (!share.watchlist && info.shares <= 0) {
+        console.log(share);
+        share.remove(() => res.json({ msg: "Delete share" }));
+      } else {
+        // update share with set info
+        if (info.shares) share.owned = info.shares;
+        if (info.watchlist) share.watchlist = info.watchlist;
+        share.save().then(() => res.json({ msg: "Updated share" }));
+      }
     }
   });
 });

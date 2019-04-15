@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./portfolio.css";
 import News from "../news/news";
 import StockPriceChart from "../stock_price_chart/stock_price_chart";
-import { getShares } from "../../util/shares_api_util";
+import { getQuote, getShares } from "../../util/shares_api_util";
 
 export class Portolio extends Component {
   constructor() {
@@ -10,12 +10,23 @@ export class Portolio extends Component {
     this.state = {
       shares: ""
     };
+
+    this.fetchQuotes = this.fetchQuotes.bind(this);
   }
 
   componentDidMount() {
     getShares(this.props.user_id).then(res =>
-      this.setState({ shares: res.data })
+      this.setState({ shares: res.data }, this.fetchQuotes)
     );
+  }
+
+  fetchQuotes() {
+    // let quotes = {};
+    // this.state.shares.forEach(share =>
+    //   getQuote(share.ticker).then(res =>
+    //     console.log(res.data["Global Quote"]["05. price"])
+    //   )
+    // );
   }
 
   formatShares(share, idx) {

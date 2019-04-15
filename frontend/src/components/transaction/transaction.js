@@ -149,6 +149,7 @@ export class Transaction extends Component {
 
   render() {
     if (!this.state.loaded) return false;
+    const latestPrice = Number(this.props.latestPrice);
 
     return (
       <div className="transaction">
@@ -171,7 +172,8 @@ export class Transaction extends Component {
             />
           </label>
           <p>
-            Market Price <span className="value">{this.props.latestPrice}</span>
+            Market Price{" "}
+            <span className="value">{latestPrice.toLocaleString()}</span>
           </p>
           <p>
             {this.state.activeButton ? "Total Cost" : "Total Proceeds"}

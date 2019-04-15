@@ -3,6 +3,8 @@ import axios from "axios";
 export const searchShares = searchInput =>
   axios.get("/api/shares/search", { params: { text: searchInput } });
 
+export const getQuote = ticker => axios.get(`/api/shares/quote/${ticker}`);
+
 // timeFormat: "intraday", "daily", "monthly"
 export const getTimesSeries = (ticker, timeFormat) => {
   let apiTimeFormat;
