@@ -5,6 +5,7 @@ const db = require("./config/keys").mongoURI;
 const passport = require("passport");
 const users = require("./routes/api/users");
 const shares = require("./routes/api/shares");
+const trades = require("./routes/api/trades");
 const news = require("./routes/api/news");
 const path = require("path");
 
@@ -28,6 +29,7 @@ if (process.env.NODE_ENV === "production") {
 
 app.use("/api/users", users);
 app.use("/api/shares", shares);
+app.use("/api/trades", trades);
 app.use("/api/news", news);
 
 const port = process.env.PORT || 5000;

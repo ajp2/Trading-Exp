@@ -3,9 +3,7 @@ const router = express.Router();
 const alphaVantageAPI = require("../../config/keys").alphaVantage;
 const axios = require("axios");
 const cheerio = require("cheerio");
-const User = require("../../models/User");
 const Share = require("../../models/Share");
-const Trade = require("../../models/Trade");
 
 router.get("/search", (req, res) => {
   axios
@@ -47,6 +45,7 @@ router.get("/description", (req, res) => {
     );
 });
 
+// Web scraper helper function
 function findInfo(html) {
   let result = {};
   const $ = cheerio.load(html);
@@ -100,38 +99,6 @@ router.post("/:ticker", (req, res) => {
       if (info.watchlist) share.watchlist = info.watchlist;
       share.save().then(() => res.json({ msg: "Updated share" }));
     }
-  });
-});
-
-router.post("/trade/:ticker", (req, res) => {
-  const user_id = req.body.user_id;
-  const ticker = req.body.ticker;
-  const company = req.body.company;
-  const buy = req.body.buy;
-  const amount = req.body.amount;
-  const price = req.body.price;
-
-  // Create a Trade record
-  const trade = {
-    user_id,
-    ticker,
-    company,
-    buy,
-    amount,
-    price
-  };
-
-  User.findOne({ _id: user_id }).then(user => {
-    if (buy) {
-      user.total_cash -= amount * price;
-    } else {
-      user.total_cash += amount * price;
-    }
-    user.save().then(updatedUser => {
-      Trade.create(trade).then(() =>
-        res.json({ msg: "Created trade", total_cash: updatedUser.total_cash })
-      );
-    });
   });
 });
 
