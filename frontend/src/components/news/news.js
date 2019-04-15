@@ -20,6 +20,7 @@ export class News extends Component {
     if (this.state.news.length === 0) return false;
     return (
       <div className="news-container">
+        <h2>Latest News</h2>
         {this.state.news.map((article, idx) => (
           <a
             href={article.url}

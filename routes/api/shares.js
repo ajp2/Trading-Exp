@@ -103,7 +103,6 @@ router.post("/:ticker", (req, res) => {
   const company = info.company;
 
   Share.findOne({ user_id, ticker }).then(share => {
-    console.log(!share.watchlist && info.shares <= 0);
     if (!share) {
       // create a share in db with set info
       const share = {
@@ -117,7 +116,6 @@ router.post("/:ticker", (req, res) => {
     } else {
       // remove from db if not in watchlist and owned shares are 0
       if (!share.watchlist && info.shares <= 0) {
-        console.log(share);
         share.remove(() => res.json({ msg: "Delete share" }));
       } else {
         // update share with set info
