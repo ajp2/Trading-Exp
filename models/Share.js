@@ -6,6 +6,10 @@ const ShareSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "User"
   },
+  company: {
+    type: String,
+    required: true
+  },
   ticker: {
     type: String,
     required: true

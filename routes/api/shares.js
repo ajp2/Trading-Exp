@@ -91,6 +91,7 @@ router.post("/:ticker", (req, res) => {
   const ticker = req.body.ticker;
   const user_id = req.body.user_id;
   const info = req.body.info;
+  const company = info.company;
 
   Share.findOne({ user_id, ticker }).then(share => {
     if (!share) {
@@ -98,6 +99,7 @@ router.post("/:ticker", (req, res) => {
       const share = {
         user_id,
         ticker,
+        company,
         owned: info.shares || 0,
         watchlist: info.watchlist || false
       };

@@ -6,7 +6,8 @@ export class Trades extends Component {
   constructor() {
     super();
     this.state = {
-      trades: ""
+      trades: "",
+      shares: ""
     };
   }
 
@@ -14,14 +15,16 @@ export class Trades extends Component {
     getTrades(this.props.user_id).then(res =>
       this.setState({ trades: res.data })
     );
-    getShares(this.props.user_id).then(res => console.log(res.data));
+    getShares(this.props.user_id).then(res =>
+      this.setState({ shares: res.data })
+    );
   }
 
   formatDate(dateStr) {
     return new Date(dateStr).toLocaleString("en-GB", { hour12: true });
   }
 
-  formatTradeString(trade, idx) {
+  formatTrade(trade, idx) {
     return (
       <tr key={idx}>
         <td>{this.formatDate(trade.date)}</td>
@@ -34,14 +37,40 @@ export class Trades extends Component {
     );
   }
 
+  formatShares(share, idx) {
+    if (share.watchlist) return false;
+
+    return (
+      <tr key={idx}>
+        <td>{share.company}</td>
+        <td>{share.ticker}</td>
+        <td>{share.owned}</td>
+      </tr>
+    );
+  }
+
   render() {
-    if (!this.state.trades) return false;
+    if (!this.state.trades || !this.state.shares) return false;
 
     return (
       <div className="trades-container">
         <h2>Shares</h2>
-        <h2>Trades</h2>
         <table>
+          <thead>
+            <tr>
+              <th>Company</th>
+              <th>Ticker</th>
+              <th>Shares</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.shares.map((share, idx) =>
+              this.formatShares(share, idx)
+            )}
+          </tbody>
+        </table>
+        <h2>Trades</h2>
+        <table className="trade-table">
           <thead>
             <tr>
               <th>Date</th>
@@ -54,7 +83,7 @@ export class Trades extends Component {
           </thead>
           <tbody>
             {this.state.trades.map((trade, idx) =>
-              this.formatTradeString(trade, idx)
+              this.formatTrade(trade, idx)
             )}
           </tbody>
         </table>

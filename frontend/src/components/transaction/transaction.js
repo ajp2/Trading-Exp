@@ -93,7 +93,8 @@ export class Transaction extends Component {
     }
 
     const info = {
-      shares: updatedShares
+      shares: updatedShares,
+      company: this.props.companyName
     };
     const trade = {
       user_id: this.props.user_id,

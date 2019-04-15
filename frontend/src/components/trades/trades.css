@@ -31,8 +31,8 @@ tr:nth-child(even) {
   background-color: #eee;
 }
 
-td:nth-child(2),
-th:nth-child(2) {
+.trade-table td:nth-child(2),
+.trade-table th:nth-child(2) {
   display: none;
 }
 
@@ -52,8 +52,8 @@ th:nth-child(2) {
     padding: 10px;
   }
 
-  td:nth-child(2),
-  th:nth-child(2) {
+  .trade-table td:nth-child(2),
+  .trade-table th:nth-child(2) {
     display: table-cell;
   }
 }
