@@ -15,6 +15,15 @@ router.get("/search", (req, res) => {
     .then(result => res.json(result.data));
 });
 
+router.get("/quote/:ticker", (req, res) => {
+  const ticker = req.params.ticker;
+  axios
+    .get(
+      ` https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${ticker}&apikey=${alphaVantageAPI}`
+    )
+    .then(result => res.json(result.data));
+});
+
 router.get("/timeseries", (req, res) => {
   const timeFormat = req.query.apiTimeFormat;
   const ticker = req.query.ticker;
@@ -107,6 +116,7 @@ router.post("/:ticker", (req, res) => {
     } else {
       // update share with set info
       if (info.shares) share.owned = info.shares;
+      share.company = company;
       if (info.watchlist) share.watchlist = info.watchlist;
       share.save().then(() => res.json({ msg: "Updated share" }));
     }

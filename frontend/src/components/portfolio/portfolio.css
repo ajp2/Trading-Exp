@@ -1,3 +1,24 @@
 .portfolio {
   margin-top: 70px;
 }
+
+.portfolio h1,
+.portfolio h2 {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 20px 0;
+  text-align: center;
+}
+
+@media only screen and (min-width: 1000px) {
+  .portfolio {
+    width: 900px;
+    margin: 25px auto;
+  }
+
+  .portfolio h1,
+  .portfolio h2 {
+    text-align: left;
+    font-size: 24px;
+  }
+}

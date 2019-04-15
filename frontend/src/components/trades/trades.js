@@ -31,8 +31,8 @@ export class Trades extends Component {
         <td>{trade.company}</td>
         <td>{trade.ticker}</td>
         <td>{trade.buy ? "Buy" : "Sell"}</td>
-        <td>{trade.amount}</td>
-        <td>{trade.price}</td>
+        <td>{trade.amount.toLocaleString()}</td>
+        <td>{trade.price.toLocaleString()}</td>
       </tr>
     );
   }
@@ -44,7 +44,7 @@ export class Trades extends Component {
       <tr key={idx}>
         <td>{share.company}</td>
         <td>{share.ticker}</td>
-        <td>{share.owned}</td>
+        <td>{share.owned.toLocaleString()}</td>
       </tr>
     );
   }
