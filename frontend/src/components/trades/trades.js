@@ -17,8 +17,7 @@ export class Trades extends Component {
   }
 
   formatDate(dateStr) {
-    const d = new Date(dateStr);
-    return `${d.toLocaleDateString()} ${d.toLocaleTimeString()}`;
+    return new Date(dateStr).toLocaleString("en-GB", { hour12: true });
   }
 
   formatTradeString(trade, idx) {
@@ -36,10 +35,10 @@ export class Trades extends Component {
 
   render() {
     if (!this.state.trades) return false;
-    console.log(this.state.trades);
 
     return (
       <div className="trades-container">
+        <h2>Shares</h2>
         <h2>Trades</h2>
         <table>
           <thead>
