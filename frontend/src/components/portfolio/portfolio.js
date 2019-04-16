@@ -13,6 +13,7 @@ export class Portolio extends Component {
     };
 
     this.fetchQuotes = this.fetchQuotes.bind(this);
+    this.createChart = this.createChart.bind(this);
   }
 
   componentDidMount() {
@@ -31,11 +32,9 @@ export class Portolio extends Component {
             ...oldShare,
             price: quotes[oldShare.ticker]
           }));
-          this.setState({ shares: updatedShares, fetchedInfo: true }, () =>
-            this.createChart(
-              this.props.total_cash,
-              this.calcTotalMarketValue(this.state.shares)
-            )
+          this.setState(
+            { shares: updatedShares, fetchedInfo: true },
+            this.createChart
           );
         }
       })
@@ -67,13 +66,32 @@ export class Portolio extends Component {
     return ((portfolioValue - initialFunds) / initialFunds) * 100;
   }
 
-  createChart(cash, shares) {
+  createChart() {
+    const shares = this.calcTotalMarketValue(this.state.shares);
+    const cash = this.props.total_cash;
+
     const ctx = document.getElementById("myPieChart");
     const myPieChart = new Chart(ctx, {
       type: "pie",
       data: {
-        datasets: [{ data: [cash, shares] }],
-        labels: ["Available Funds", "Market Value of Shares"]
+        datasets: [
+          {
+            data: [shares, cash],
+            backgroundColor: ["#39f5cb", "#21ce99"]
+          }
+        ],
+        labels: ["Market Value of Shares", "Available Funds"]
+      },
+      options: {
+        tooltips: {
+          callbacks: {
+            label: function(tooltipItem, data) {
+              let tooltipValue =
+                data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+              return parseFloat(tooltipValue).toLocaleString();
+            }
+          }
+        }
       }
     });
   }
