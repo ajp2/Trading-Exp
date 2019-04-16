@@ -20,6 +20,19 @@ export class Portolio extends Component {
     getShares(this.props.user_id).then(res =>
       this.setState({ shares: res.data }, this.fetchQuotes)
     );
+
+    // Fetch updated quotes every 5 minutes
+    this.timer = setInterval(
+      () =>
+        getShares(this.props.user_id).then(res =>
+          this.setState({ shares: res.data }, this.fetchQuotes)
+        ),
+      300000
+    );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
   }
 
   fetchQuotes() {
@@ -50,6 +63,19 @@ export class Portolio extends Component {
         <td>{share.company}</td>
         <td>{share.ticker}</td>
         <td>{share.owned}</td>
+        <td>{price}</td>
+      </tr>
+    );
+  }
+
+  formatWatchlist(share, idx) {
+    if (!share.watchlist) return false;
+    const price = Number(share.price).toString();
+
+    return (
+      <tr key={idx}>
+        <td>{share.company}</td>
+        <td>{share.ticker}</td>
         <td>{price}</td>
       </tr>
     );
@@ -154,6 +180,21 @@ export class Portolio extends Component {
           <tbody>
             {this.state.shares.map((share, idx) =>
               this.formatShares(share, idx)
+            )}
+          </tbody>
+        </table>
+        <h2>Watchlist</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Company</th>
+              <th>Ticker</th>
+              <th>Market Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.shares.map((share, idx) =>
+              this.formatWatchlist(share, idx)
             )}
           </tbody>
         </table>

@@ -10,6 +10,13 @@
   padding-right: 25px;
 }
 
+.news-container h2 {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 20px 0 5px 0;
+  text-align: center;
+}
+
 .news-item {
   margin: 10px 0;
   padding: 20px;
@@ -39,6 +46,11 @@
   .news-container {
     width: 900px;
     margin: 0 auto;
+  }
+
+  .news-container h2 {
+    text-align: left;
+    font-size: 24px;
   }
 
   .news-item img {

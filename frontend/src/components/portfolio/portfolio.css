@@ -26,6 +26,10 @@
   font-weight: bold;
 }
 
+.portfolio-chart {
+  margin-top: 15px;
+}
+
 @media only screen and (min-width: 700px) {
   .portfolio-info-container {
     display: flex;
@@ -54,6 +58,7 @@
 
   .portfolio-chart {
     width: 50%;
+    margin: 0;
   }
 }
 
