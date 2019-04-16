@@ -10,15 +10,65 @@
   text-align: center;
 }
 
+.portfolio h1 {
+  font-size: 24px;
+}
+
+.portfolio-info h3 {
+  padding: 10px;
+}
+
+.info-value {
+  text-align: right;
+}
+
+.total {
+  font-weight: bold;
+}
+
+@media only screen and (min-width: 700px) {
+  .portfolio-info-container {
+    display: flex;
+  }
+
+  .portfolio-info {
+    width: 50%;
+  }
+
+  .info-top {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .info-bottom {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .info-value {
+    display: block;
+    padding: 10px 0;
+  }
+
+  .portfolio-chart {
+    width: 50%;
+  }
+}
+
 @media only screen and (min-width: 1000px) {
   .portfolio {
     width: 900px;
     margin: 25px auto;
   }
 
-  .portfolio h1,
   .portfolio h2 {
     text-align: left;
     font-size: 24px;
+  }
+
+  .portfolio h1 {
+    text-align: left;
+    font-size: 28px;
   }
 }

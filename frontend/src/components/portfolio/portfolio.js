@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./portfolio.css";
+import Chart from "chart.js";
 import News from "../news/news";
-import StockPriceChart from "../stock_price_chart/stock_price_chart";
 import { getQuote, getShares } from "../../util/shares_api_util";
 
 export class Portolio extends Component {
@@ -31,7 +31,12 @@ export class Portolio extends Component {
             ...oldShare,
             price: quotes[oldShare.ticker]
           }));
-          this.setState({ shares: updatedShares, fetchedInfo: true });
+          this.setState({ shares: updatedShares, fetchedInfo: true }, () =>
+            this.createChart(
+              this.props.total_cash,
+              this.calcTotalMarketValue(this.state.shares)
+            )
+          );
         }
       })
     );
@@ -62,8 +67,20 @@ export class Portolio extends Component {
     return ((portfolioValue - initialFunds) / initialFunds) * 100;
   }
 
+  createChart(cash, shares) {
+    const ctx = document.getElementById("myPieChart");
+    const myPieChart = new Chart(ctx, {
+      type: "pie",
+      data: {
+        datasets: [{ data: [cash, shares] }],
+        labels: ["Available Funds", "Market Value of Shares"]
+      }
+    });
+  }
+
   render() {
     if (!this.state.fetchedInfo) return false;
+
     const total_cash = this.props.total_cash;
     const totalMarketValue = this.calcTotalMarketValue(this.state.shares);
     const portfolioValue = total_cash + totalMarketValue;
@@ -72,12 +89,39 @@ export class Portolio extends Component {
     return (
       <div className="portfolio">
         <h1>Portfolio</h1>
-        <h3>Available Funds: {total_cash.toLocaleString()}</h3>
-        <h3>
-          Total Market Value in Shares: {totalMarketValue.toLocaleString()}
-        </h3>
-        <h3>Portfolio Value: {portfolioValue.toLocaleString()}</h3>
-        <h3>Total Return: {totalReturn + "%"}</h3>
+        <div className="portfolio-info-container">
+          <div className="portfolio-info">
+            <div className="info-top">
+              <h3>
+                Available Funds:{" "}
+                <span className="info-value">
+                  {total_cash.toLocaleString()}
+                </span>
+              </h3>
+              <h3>
+                Market Value of Shares:{" "}
+                <span className="info-value">
+                  {totalMarketValue.toLocaleString()}
+                </span>
+              </h3>
+            </div>
+            <div className="info-bottom">
+              <h3>
+                Portfolio Value:{" "}
+                <span className="info-value total">
+                  {portfolioValue.toLocaleString()}
+                </span>
+              </h3>
+              <h3>
+                Total Return:{" "}
+                <span className="info-value total">{totalReturn + "%"}</span>
+              </h3>
+            </div>
+          </div>
+          <div className="portfolio-chart">
+            <canvas id="myPieChart" />
+          </div>
+        </div>
 
         <h2>Shares</h2>
         <table>
