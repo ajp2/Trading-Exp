@@ -89,13 +89,19 @@ export class Company extends Component {
           }
         });
       } else {
-        console.log(res.data);
+        const arrOfPrices = formatPrices.objectToArray(
+          res.data[this.apiData[timeFormat]]
+        );
+        // Return false if error
+        if (!arrOfPrices) {
+          this.setState({ error: true });
+          return false;
+        }
+
         this.setState(prevState => ({
           companyInfo: {
             ...prevState.companyInfo,
-            [timeFormat]: formatPrices.objectToArray(
-              res.data[this.apiData[timeFormat]]
-            )
+            [timeFormat]: arrOfPrices
           }
         }));
         if (timeFormat === "intraday") {
@@ -183,6 +189,8 @@ export class Company extends Component {
 
   render() {
     if (!this.state.fetchedInfo) return false;
+    if (this.state.error)
+      return <h1>Too many requests to API. Please try again in 60 seconds.</h1>;
 
     return (
       <div className="company">

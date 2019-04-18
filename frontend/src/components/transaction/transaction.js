@@ -92,11 +92,14 @@ export class Transaction extends Component {
       updatedShares = this.state.ownedShares - Number(this.state.shares);
     }
 
+    // set watchlist to false to remove from watchlist
+    // if buying shares
     const info = {
       shares: updatedShares,
       watchlist: false,
       company: this.props.companyName
     };
+
     const trade = {
       user_id: this.props.user_id,
       ticker: this.props.ticker,

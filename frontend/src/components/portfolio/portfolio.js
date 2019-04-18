@@ -55,7 +55,10 @@ export class Portolio extends Component {
     const price = Number(share.price).toString();
 
     return (
-      <tr key={idx} onClick={() => this.onShareItemClick(share.ticker)}>
+      <tr
+        key={idx}
+        onClick={() => this.onShareItemClick(share.ticker, share.company)}
+      >
         <td>{share.company}</td>
         <td>{share.ticker}</td>
         <td>{share.owned}</td>
@@ -77,7 +80,8 @@ export class Portolio extends Component {
     );
   }
 
-  onShareItemClick(ticker) {
+  onShareItemClick(ticker, company) {
+    localStorage.setItem("companyName", company);
     this.props.history.push(`/stocks/${ticker}`);
   }
 

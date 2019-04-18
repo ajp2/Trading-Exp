@@ -129,8 +129,12 @@ export class NavBar extends Component {
 
   hamburgerMenu() {
     const menu = document.querySelector(".hamburger-menu");
+    const links = document.querySelector(".links");
     menu.addEventListener("click", () => {
-      const links = document.querySelector(".links");
+      links.classList.toggle("show-links");
+    });
+
+    links.addEventListener("click", () => {
       links.classList.toggle("show-links");
     });
   }

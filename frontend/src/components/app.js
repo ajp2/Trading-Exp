@@ -9,7 +9,7 @@ import SignupFormContainer from "./session/signup_form_container";
 import LoginFormContainer from "./session/login_form_container";
 import PortfolioContainer from "./portfolio/portfolio_container";
 import SearchContainer from "./search/search_container";
-import CompanyContainer from "../components/company/company_container";
+import Company from "../components/company/company";
 import TradesContainer from "../components/trades/trades_container";
 
 class App extends Component {
@@ -28,11 +28,7 @@ class App extends Component {
           />
           <ProtectedRoute exact path="/search" component={SearchContainer} />
           <ProtectedRoute exact path="/trades" component={TradesContainer} />
-          <ProtectedRoute
-            exact
-            path="/stocks/:ticker"
-            component={CompanyContainer}
-          />
+          <ProtectedRoute exact path="/stocks/:ticker" component={Company} />
         </Switch>
       </div>
     );
