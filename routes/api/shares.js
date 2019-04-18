@@ -115,12 +115,12 @@ router.post("/:ticker", (req, res) => {
       Share.create(share).then(() => res.json({ msg: "Created share" }));
     } else {
       // remove from db if not in watchlist and owned shares are 0
-      if (!share.watchlist && info.shares <= 0) {
+      if (!info.watchlist && !info.shares) {
         share.remove(() => res.json({ msg: "Delete share" }));
       } else {
         // update share with set info
         if (info.shares) share.owned = info.shares;
-        if (info.watchlist) share.watchlist = info.watchlist;
+        share.watchlist = info.watchlist;
         share.save().then(() => res.json({ msg: "Updated share" }));
       }
     }

@@ -94,6 +94,7 @@ export class Transaction extends Component {
 
     const info = {
       shares: updatedShares,
+      watchlist: false,
       company: this.props.companyName
     };
     const trade = {
@@ -116,7 +117,8 @@ export class Transaction extends Component {
 
   handleWatchlistSubmit(e) {
     const info = {
-      watchlist: true
+      company: this.props.companyName,
+      watchlist: !this.state.watchlist
     };
 
     this.submitShareInfo(info).then(() => {
@@ -214,7 +216,10 @@ export class Transaction extends Component {
 
         {/* Show remove button if in watchlist */}
         {this.state.watchlist ? (
-          <button className="watchlist watchlist--remove">
+          <button
+            className="watchlist watchlist--remove"
+            onClick={this.handleWatchlistSubmit}
+          >
             Remove from Watchlist
           </button>
         ) : (

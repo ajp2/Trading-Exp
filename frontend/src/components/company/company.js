@@ -89,6 +89,7 @@ export class Company extends Component {
           }
         });
       } else {
+        console.log(res.data);
         this.setState(prevState => ({
           companyInfo: {
             ...prevState.companyInfo,

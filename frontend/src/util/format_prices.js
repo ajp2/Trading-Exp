@@ -1,7 +1,12 @@
 export const objectToArray = obj => {
-  const keys = Object.keys(obj).sort();
-  const values = keys.map(key => obj[key]);
-  return [keys, values];
+  // error if obj is undefined. This is due to too many requests to API
+  try {
+    const keys = Object.keys(obj).sort();
+    const values = keys.map(key => obj[key]);
+    return [keys, values];
+  } catch (err) {
+    return false;
+  }
 };
 
 export const formatIntradayPrices = apiInfo => {
