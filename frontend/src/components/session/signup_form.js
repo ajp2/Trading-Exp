@@ -42,7 +42,7 @@ export class SignupForm extends Component {
   render() {
     return (
       <div className="signup-page">
-        <img src={require("../../images/signup-image.jpg")} alt="" />
+        <div className="image" />
         <div className="signup-container">
           <h2>Signup</h2>
           {this.props.errors ? (

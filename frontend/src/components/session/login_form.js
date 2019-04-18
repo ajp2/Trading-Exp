@@ -34,7 +34,8 @@ export class LoginForm extends Component {
   render() {
     return (
       <div className="login-page">
-        <img src={require("../../images/login-image.jpg")} alt="" />
+        <div className="image" />
+        {/* <img src={require("../../images/login-image.jpg")} alt="" /> */}
         <div className="login-container">
           <h2>Login</h2>
           {this.props.errors ? (

@@ -12,14 +12,6 @@
   margin: 0 auto;
 }
 
-.login-page img {
-  display: none;
-}
-
-.login-form {
-  margin-top: 5%;
-}
-
 .login-container h2 {
   font-size: 32px;
   font-weight: bold;
@@ -46,6 +38,7 @@
   font-weight: bold;
   font-size: 20px;
   margin: 0 auto;
+  margin-bottom: 25px;
 }
 
 .login-form button:hover {
@@ -54,14 +47,17 @@
 }
 
 @media screen and (min-width: 768px) {
-  .login-page img {
+  .login-page .image {
+    background: url("../../images//login-image.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
     display: initial;
     width: 50%;
-    height: calc(100vh - 61px);
+    min-height: calc(100vh - 60px);
   }
 
   .login-container h2 {
-    margin-top: 50%;
+    margin-top: 20%;
     margin-bottom: 10%;
   }
 
@@ -81,8 +77,6 @@
   }
 
   .login-container h2 {
-    margin-top: 40%;
-    margin-bottom: 10%;
     margin-left: 170px;
   }
 
