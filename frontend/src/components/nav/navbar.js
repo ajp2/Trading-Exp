@@ -74,18 +74,26 @@ export class NavBar extends Component {
   displayLinks() {
     if (this.props.loggedIn) {
       return (
-        <div className="links">
-          <Link to="/portfolio">Home</Link>
-          <Link to="/trades">Trades</Link>
+        <ul className="links">
+          <li>
+            <Link to="/portfolio">Home</Link>
+          </li>
+          <li>
+            <Link to="/trades">Trades</Link>
+          </li>
           <button onClick={this.handleLogout}>Logout</button>
-        </div>
+        </ul>
       );
     } else {
       return (
-        <div className="links">
-          <Link to="/signup">Sign Up</Link>
-          <Link to="/login">Login</Link>
-        </div>
+        <ul className="links">
+          <li>
+            <Link to="/signup">Sign Up</Link>
+          </li>
+          <li>
+            <Link to="/login">Login</Link>
+          </li>
+        </ul>
       );
     }
   }
@@ -154,11 +162,13 @@ export class NavBar extends Component {
           )}
         </div>
 
-        {this.displayLinks()}
-        <div className="hamburger-menu">
-          <div />
-          <div />
-          <div />
+        <div>
+          <div className="hamburger-menu">
+            <div />
+            <div />
+            <div />
+          </div>
+          {this.displayLinks()}
         </div>
       </header>
     );

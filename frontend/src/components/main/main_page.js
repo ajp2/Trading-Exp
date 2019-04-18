@@ -17,21 +17,24 @@ class MainPage extends Component {
 
   render() {
     return (
-      <div className="main">
-        <div className="image">
-          <img src={require("../../images/front-page-image.jpg")} alt="" />
-        </div>
-        <div className="background-container" />
-        <div className="main-text">
-          <h2>Test your investing skills.</h2>
-          <p>
-            Sick of losing money in the market? Start practicing for free today.
-          </p>
-          {this.props.loggedIn ? (
-            <Link to="/portfolio">Back To Portfolio</Link>
-          ) : (
-            <button onClick={this.guestLogin}>Login as a Guest</button>
-          )}
+      <div className="background-container">
+        <div className="main">
+          <div className="image">
+            <img src={require("../../images/front-page-image.jpg")} alt="" />
+          </div>
+
+          <div className="main-text">
+            <h2>Test your investing skills.</h2>
+            <p>
+              Sick of losing money in the market? Start practicing for free
+              today.
+            </p>
+            {this.props.loggedIn ? (
+              <Link to="/portfolio">Back To Portfolio</Link>
+            ) : (
+              <button onClick={this.guestLogin}>Login as a Guest</button>
+            )}
+          </div>
         </div>
       </div>
     );

@@ -14,6 +14,7 @@ export class Portolio extends Component {
 
     this.fetchQuotes = this.fetchQuotes.bind(this);
     this.createChart = this.createChart.bind(this);
+    this.onShareItemClick = this.onShareItemClick.bind(this);
   }
 
   componentDidMount() {
@@ -22,13 +23,7 @@ export class Portolio extends Component {
     );
 
     // Fetch updated quotes every 5 minutes
-    this.timer = setInterval(
-      () =>
-        getShares(this.props.user_id).then(res =>
-          this.setState({ shares: res.data }, this.fetchQuotes)
-        ),
-      300000
-    );
+    this.timer = setInterval(this.fetchQuotes, 300000);
   }
 
   componentWillUnmount() {
@@ -36,6 +31,7 @@ export class Portolio extends Component {
   }
 
   fetchQuotes() {
+    // Add prices to share info
     let quotes = {};
     this.state.shares.forEach(share =>
       getQuote(share.ticker).then(res => {
@@ -59,7 +55,7 @@ export class Portolio extends Component {
     const price = Number(share.price).toString();
 
     return (
-      <tr key={idx}>
+      <tr key={idx} onClick={() => this.onShareItemClick(share.ticker)}>
         <td>{share.company}</td>
         <td>{share.ticker}</td>
         <td>{share.owned}</td>
@@ -73,12 +69,16 @@ export class Portolio extends Component {
     const price = Number(share.price).toString();
 
     return (
-      <tr key={idx}>
+      <tr key={idx} onClick={() => this.onShareItemClick(share.ticker)}>
         <td>{share.company}</td>
         <td>{share.ticker}</td>
         <td>{price}</td>
       </tr>
     );
+  }
+
+  onShareItemClick(ticker) {
+    this.props.history.push(`/stocks/${ticker}`);
   }
 
   calcTotalMarketValue(shares) {
@@ -198,7 +198,6 @@ export class Portolio extends Component {
             )}
           </tbody>
         </table>
-        <h2>Recent Trades</h2>
 
         <News />
       </div>
