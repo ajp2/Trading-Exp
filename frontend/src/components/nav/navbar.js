@@ -135,7 +135,7 @@ export class NavBar extends Component {
     });
 
     links.addEventListener("click", () => {
-      links.classList.toggle("show-links");
+      links.classList.remove("show-links");
     });
   }
 

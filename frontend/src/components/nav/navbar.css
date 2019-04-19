@@ -54,11 +54,12 @@
 
 .show-links {
   display: initial;
-  width: 85%;
+  width: 100%;
   text-align: center;
   position: absolute;
+  z-index: 1;
   top: 60px;
-  left: calc(15% / 2);
+  left: 0;
   background: #fff;
 }
 

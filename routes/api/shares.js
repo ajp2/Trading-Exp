@@ -97,7 +97,7 @@ router.get("/:ticker", (req, res) => {
 });
 
 router.post("/:ticker", (req, res) => {
-  const ticker = req.body.ticker;
+  const ticker = req.params.ticker;
   const user_id = req.body.user_id;
   const info = req.body.info;
   const company = info.company;
@@ -116,7 +116,7 @@ router.post("/:ticker", (req, res) => {
     } else {
       // remove from db if not in watchlist and owned shares are 0
       if (!info.watchlist && !info.shares) {
-        share.remove(() => res.json({ msg: "Delete share" }));
+        share.remove(() => res.json({ msg: "Deleted share" }));
       } else {
         // update share with set info
         if (info.shares) share.owned = info.shares;
