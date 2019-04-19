@@ -134,7 +134,7 @@ function findInfo(html) {
   - A lot of formatting was required to get the data into a useable state
 - Difficulty setting up RESTful endpoints.
   - In some cases, whether to create, update, or delete a Share could only be determined on the backend
-  - Therefore, transactions or changes to the watchlist were send to a single route where the information was processed.
+  - Therefore, transactions or changes to the watchlist were sent to a single route where the information was processed.
 
 ## Project Design
 
