@@ -34,7 +34,7 @@ export class SignupForm extends Component {
             username: this.state.username,
             password: this.state.password
           })
-          .then(() => this.props.history.push("/summary"));
+          .then(() => this.props.history.push("/portfolio"));
       }
     });
   }
