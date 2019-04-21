@@ -31,6 +31,10 @@ export class Portolio extends Component {
   }
 
   fetchQuotes() {
+    if (Array.isArray(this.state.shares) && this.state.shares.length === 0) {
+      this.setState({ fetchedInfo: true }, this.createChart);
+    }
+
     // Add prices to share info
     let quotes = {};
     this.state.shares.forEach(share =>
