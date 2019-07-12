@@ -132,6 +132,9 @@ function findInfo(html) {
   - The provided search endpoint was too slow to function as a real time search bar. The solution was to use a list of major companies in JSON format. More companies can be searched, which utilises the endpoint, but it is not in real time.
   - Getting detailed price data did not return the company name. To include it in the company page, the name had to be saved to localStorate from the previous page before being redirected. Saving the name in the redux store was ineffective as the name would be removed upon refresh.
   - A lot of formatting was required to get the data into a useable state
+- A bug where the chart didn't show any changes when a different time period was selected
+  - In some occasions it showed two different charts which alternated when hovered
+  - I ended up having to save the chart instance into a variable and clear that chart before rendering a new chart with different values
 - Difficulty setting up RESTful endpoints.
   - In some cases, whether to create, update, or delete a Share could only be determined on the backend
   - Therefore, transactions or changes to the watchlist were sent to a single route where the information was processed.
