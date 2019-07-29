@@ -39,6 +39,7 @@ export class Portolio extends Component {
     let quotes = {};
     this.state.shares.forEach(share =>
       getQuote(share.ticker).then(res => {
+        console.log(res);
         quotes[share.ticker] = res.data["Global Quote"]["05. price"];
         if (Object.keys(quotes).length === this.state.shares.length) {
           const updatedShares = this.state.shares.map(oldShare => ({
